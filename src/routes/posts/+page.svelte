@@ -4,6 +4,7 @@
     import { PUBLIC_NAME } from "$env/static/public";
 
     export let data: PageData;
+    console.log(data)
 </script>
 
 <svelte:head>
@@ -19,6 +20,6 @@
             <hr/>
         {/if}
     {/each}
-    {:else}
-        No data
+{:else}
+    No data
 {/if}

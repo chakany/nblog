@@ -4,24 +4,34 @@
     import { type Event } from "nostr-tools"
     import SvelteMarkdown from "svelte-markdown";
     import { readingTime, getTagValues } from "$lib/util";
+    import Tag from "$lib/Tag.svelte"
 
     export let post: Event
+
+    const published_at = getTagValues(post.tags, "published_at")
+    const title = getTagValues(post.tags, "title")
+    const summary = getTagValues(post.tags, "summary")
+    const image = getTagValues(post.tags, "image")
 </script>
 
 <div class="flex flex-col items-center">
     <div>
         <div>
-            Published {formatDistance(new Date(post.created_at * 1000), new Date(), { addSuffix: true })}
-            {#if post.created_at !== Number(getTagValues(post.tags, "published_at")[0])}
+            Published {formatDistance(new Date(published_at ? Number(published_at[0]) * 1000: 0), new Date(), { addSuffix: true })}
+            {#if post.created_at !== (published_at ? Number(published_at[0]): 0)}
                 | Edited {formatDistance(new Date(post.created_at * 1000), new Date(), { addSuffix: true })}
             {/if}
-            |
-            {readingTime(post.content)} min read
+            | {readingTime(post.content)} min read
         </div>
-        <h1 class="text-5xl font-extrabold">{getTagValues(post.tags, "title")[0]}</h1>
-        <p class="subtext pt-1">{getTagValues(post.tags, "summary")[0]}</p>
+        <h1 class="text-5xl font-extrabold">{title ? title[0] : "Title"}</h1>
+        <p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
+        <div class="flex mt-2">
+            {#each post.tags.filter((v) => v[0] === "t") as tag}
+                <span class="mr-3"><Tag name={tag[1]} /></span>
+            {/each}
+        </div>
     </div>
-    <img class="rounded max-w-xl my-5 object-fill" src={getTagValues(post.tags, "image")[0]} alt="Post" />
+    <img class="rounded max-w-xl my-5 object-fill" src={image ? image[0] : "Image"} alt="Post" />
     <article class="prose prose-lg dark:prose-invert prose-img:rounded-xl prose-headings:underline">
         <SvelteMarkdown source={post.content} />
     </article>

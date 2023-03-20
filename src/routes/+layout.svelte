@@ -9,9 +9,9 @@
     <link rel="icon" type="image/x-icon" href={PUBLIC_PICTURE} />
 </svelte:head>
 
-<nav class="flex mx-20 my-10">
+<nav class="flex mx-10 md:mx-20 my-10">
     <a href="/" target="_self" class="flex my-auto">
-        <img class="rounded my-auto w-14" src={PUBLIC_PICTURE} />
+        <img class="rounded my-auto w-14" src={PUBLIC_PICTURE} alt="Header" />
         <span class="my-auto ml-2">{PUBLIC_NAME}</span>
     </a>
     <div class="flex my-auto ml-10">

@@ -5,10 +5,7 @@ export function readingTime(text: string): number {
 }
 
 export function getTagValues(tags: any[], name: string): any[] | null {
-    // If it wasn't wrapped in an array then running .shift would remove it from
-    // the original event itself, which we don't want
-    const tag = [...tags.find((v) => v[0] === name)]
-    if (!tag) return null
-    tag.shift()
-    return tag
+    const [tagName, ...values] = tags.find((v) => v[0] === name)
+    if (!tagName) return null
+    return values
 }
