@@ -5,6 +5,10 @@
     import SvelteMarkdown from "svelte-markdown";
     import { readingTime, getTagValues } from "$lib/util";
     import Tag from "$lib/Tag.svelte"
+    import Fa from 'svelte-fa'
+    import { faLink } from '@fortawesome/free-solid-svg-icons'
+    import { faTwitter, faLinkedin, faFacebook } from "@fortawesome/free-brands-svg-icons"
+    import { onMount } from "svelte";
 
     export let post: Event
 
@@ -12,16 +16,31 @@
     const title = getTagValues(post.tags, "title")
     const summary = getTagValues(post.tags, "summary")
     const image = getTagValues(post.tags, "image")
+
+    let url: string
+    onMount(() => {
+        url = window.location.href
+    })
 </script>
 
 <div class="flex flex-col items-center">
     <div>
-        <div>
-            Published {formatDistance(new Date(published_at ? Number(published_at[0]) * 1000: 0), new Date(), { addSuffix: true })}
-            {#if post.created_at !== (published_at ? Number(published_at[0]): 0)}
-                | Edited {formatDistance(new Date(post.created_at * 1000), new Date(), { addSuffix: true })}
-            {/if}
-            | {readingTime(post.content)} min read
+        <div class="flex subtext">
+            <div>
+                Published {formatDistance(new Date(published_at ? Number(published_at[0]) * 1000: 0), new Date(), { addSuffix: true })}
+                {#if post.created_at !== (published_at ? Number(published_at[0]): 0)}
+                    | Edited {formatDistance(new Date(post.created_at * 1000), new Date(), { addSuffix: true })}
+                {/if}
+                | {readingTime(post.content)} min read
+            </div>
+            <div class="flex my-auto ml-auto">
+                <div class="cursor-pointer" on:click={() => navigator.clipboard.writeText(url)}>
+                    <Fa icon={faLink} />
+                </div>
+                <a class="ml-2" href="https://twitter.com/intent/tweet?url={url}">
+                    <Fa icon={faTwitter} />
+                </a>
+            </div>
         </div>
         <h1 class="text-5xl font-extrabold">{title ? title[0] : "Title"}</h1>
         <p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
