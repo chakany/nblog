@@ -3,6 +3,9 @@ import Nostr from "$lib/Nostr"
 import type { Event } from "nostr-tools"
 import { getTagValues } from "$lib/util";
 
+export const ssr = true;
+export const csr = false;
+
 export const load = (async () => {
     const nostrClient = new Nostr()
     nostrClient.connect()

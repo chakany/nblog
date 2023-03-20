@@ -1,6 +1,9 @@
 import type { PageLoad } from './$types';
 import Nostr from "$lib/Nostr"
 
+export const ssr = true;
+export const csr = true;
+
 export const load = (async ({ params }) => {
     const nostrClient = new Nostr()
     nostrClient.connect()

@@ -19,7 +19,7 @@
 
     let url: string
     onMount(() => {
-        url = window.location.href
+        url = window.location.host + "/posts/" + post.id
     })
 </script>
 
