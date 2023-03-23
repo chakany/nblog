@@ -6,7 +6,7 @@ See a running demo at https://blog.jacany.com
 
 ## Configuration
 Configuration is done with enviroment variables.
-* `PUBLIC_PUBKEYS` List of pubkeys to fetch events for seperated by a `,`
+* `PUBLIC_PUBKEYS` List of **HEX** pubkeys to fetch events for seperated by a `,`
 * `PUBLIC_RELAYS` List of relay URLs to connect to seperated by a `,`
 * `PUBLIC_NAME` A name for your blog. ex: `nym's blog`
 * `PUBLIC_PICTURE` A Picture URL for your blog, used in favicon and header.
