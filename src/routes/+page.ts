@@ -2,12 +2,19 @@ import type { PageLoad } from "./$types";
 import Nostr from "$lib/Nostr"
 import type { Event } from "nostr-tools"
 import { getTagValues } from "$lib/util";
+import { error } from "@sveltejs/kit";
 
 export const ssr = true;
 
 export const load = (async () => {
     const nostrClient = new Nostr()
-    nostrClient.connect()
+    try {
+        await nostrClient.connect()
+    } catch (err) {
+        throw error(500, {
+            message: "Couldn't connect to relays"
+        })
+    }
     const sub = nostrClient.sub(nostrClient.relays, [
         {
             kinds: [30023],
