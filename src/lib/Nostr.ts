@@ -14,7 +14,11 @@ export default class Nostr extends SimplePool {
 
 	public async connect() {
 		for (let i = 0; i < this.relays.length; i++) {
-			await this.ensureRelay(this.relays[i]);
+			try {
+				await this.ensureRelay(this.relays[i]);
+			} catch (error) {
+				// GFY
+			}
 		}
 	}
 }
