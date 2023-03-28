@@ -22,7 +22,7 @@
 </nav>
 <hr />
 
-<div class="container">
+<div class="container py-8">
 	<slot />
 </div>
 

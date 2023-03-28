@@ -14,13 +14,11 @@
 
 {#if data.posts}
 	{#each data.posts as post, i}
-		<div class="py-8">
-			{#if i === 0}
-				<FullPost {post} />
-			{:else}
-				<ListPost {post} />
-			{/if}
-		</div>
+		{#if i === 0}
+			<FullPost {post} />
+		{:else}
+			<ListPost {post} />
+		{/if}
 		{#if data.posts[i + 1]}
 			<hr />
 		{/if}
