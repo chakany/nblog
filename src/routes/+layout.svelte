@@ -2,10 +2,19 @@
 	import "../app.css";
 	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
+	import {onMount} from "svelte";
+
+	let url: string;
+	onMount(() => {
+		url = window.location.host + "/" + window.location.href;
+	});
 </script>
 
 <svelte:head>
 	<title>{PUBLIC_NAME}</title>
+	<meta property="og:site_name" content={PUBLIC_NAME} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={url} />
 	<link rel="icon" type="image/x-icon" href={PUBLIC_PICTURE} />
 </svelte:head>
 

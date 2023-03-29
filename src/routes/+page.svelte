@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>Home - {PUBLIC_NAME}</title>
+	<meta property="og:title" content="Home" />
 </svelte:head>
 
 {#if data.posts}

@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>Posts - {PUBLIC_NAME}</title>
+	<meta property="og:title" content="Posts" />
 </svelte:head>
 
 {#if data.posts[0]}

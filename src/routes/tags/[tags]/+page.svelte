@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>Tags {tagList} - {PUBLIC_NAME}</title>
+	<meta property="og:title" content={"Tags " + tagList} />
 </svelte:head>
 
 <h1 class="text-3xl">Posts that match tags: {data.tags.join(", ")}</h1>
