@@ -22,7 +22,7 @@
 </nav>
 <hr />
 
-<div class="container px-6 md:px-24 lg:px-52 py-8">
+<div class="container px-6 py-8 md:px-24 lg:px-52">
 	<slot />
 </div>
 

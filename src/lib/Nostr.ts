@@ -29,7 +29,7 @@ export default class Nostr extends SimplePool {
 		// @ts-expect-error we are literally checking if it is there
 		if (browser && window.nostr) {
 			// @ts-expect-error we already confirmed it's present
-			return window.nostr.getPublicKey()
+			return window.nostr.getPublicKey();
 		}
 	}
 
@@ -37,11 +37,11 @@ export default class Nostr extends SimplePool {
 		// @ts-expect-error we are checking
 		if (browser && window.nostr) {
 			// @ts-expect-error it's there
-			event = await window.nostr.signEvent(event)
+			event = await window.nostr.signEvent(event);
 			this.pubkey = event.pubkey;
-			return event
+			return event;
 		}
 
-		return null
+		return null;
 	}
 }
