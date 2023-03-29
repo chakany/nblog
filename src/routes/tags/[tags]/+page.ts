@@ -7,15 +7,21 @@ import { error } from "@sveltejs/kit";
 export const ssr = true;
 export const csr = false;
 
-export const load = (async ({ params }) => {
+export const load = (async ({ params, setHeaders }) => {
     const nostrClient = new Nostr()
     try {
+        setHeaders({
+            "cache-control": "no-cache"
+        });
         await nostrClient.connect()
     } catch (err) {
         throw error(500, {
             message: "Couldn't connect to relays"
         })
     }
+    setHeaders({
+        "cache-control": "public, max-age: 3600"
+    });
     const tagArr = params.tags.split(",")
     const sub = nostrClient.sub(nostrClient.relays, [
         {

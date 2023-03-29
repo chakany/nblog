@@ -2,19 +2,25 @@ import type { PageLoad } from "./$types";
 import Nostr from "$lib/Nostr"
 import type { Event } from "nostr-tools"
 import { getTagValues } from "$lib/util";
-import { error } from "@sveltejs/kit";
+import { error, } from "@sveltejs/kit";
 
 export const ssr = true;
 
-export const load = (async () => {
+export const load = (async ({ setHeaders }) => {
     const nostrClient = new Nostr()
     try {
         await nostrClient.connect()
     } catch (err) {
+        setHeaders({
+            "cache-control": "no-cache"
+        });
         throw error(500, {
             message: "Couldn't connect to relays"
         })
     }
+    setHeaders({
+        "cache-control": "public, max-age: 3600"
+    });
     const sub = nostrClient.sub(nostrClient.relays, [
         {
             kinds: [30023],
