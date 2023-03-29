@@ -14,13 +14,17 @@
 
 {#if data.posts}
 	{#each data.posts as post, i}
-		{#if i === 0}
-			<FullPost {post} />
-		{:else}
-			<ListPost {post} />
-		{/if}
+		<div class={data.posts[i + 1] ? "pb-8" : ""}>
+			{#if i === 0}
+				<FullPost {post} />
+			{:else}
+				<ListPost {post} />
+			{/if}
+		</div>
 		{#if data.posts[i + 1]}
-			<hr />
+			<div class="pb-8">
+				<hr />
+			</div>
 		{/if}
 	{/each}
 {:else}
