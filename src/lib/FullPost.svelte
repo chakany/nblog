@@ -7,8 +7,11 @@
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
 	import { faLink } from "@fortawesome/free-solid-svg-icons";
-	import { faTwitter, faLinkedin, faFacebook } from "@fortawesome/free-brands-svg-icons";
+	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
+	import Reaction from "$lib/Reaction.svelte";
+	import { nostr } from "$lib/stores";
+	import { browser } from "$app/environment";
 
 	export let post: Event;
 
@@ -21,9 +24,46 @@
 	onMount(() => {
 		url = window.location.host + "/posts/" + post.id;
 	});
+
+	let reactions: Event[] = []
+	if (browser) {
+		$nostr.connect()
+	}
+	// Reactions
+	if (browser && post) {
+		let sub = $nostr.sub($nostr.relays, [
+			{
+				kinds: [7],
+				"#e": [post.id]
+			}
+		])
+		sub.on("event", (event: Event) => {
+			console.log(event)
+			reactions = [...reactions, event]
+		})
+	}
+
+	async function react(reaction: string) {
+		let event = {
+			kind: 7,
+			tags: [
+					["client", "nblog"],
+					["e", post.id]
+			],
+			created_at: Math.floor(Date.now() / 1000),
+			content: reaction,
+		}
+		event = await $nostr.signEvent(event)
+		if (!event) {
+			// No Extension
+		}
+		if (reactions.find((r) => r.pubkey === $nostr.pubkey)) return;
+
+		await $nostr.publish($nostr.relays, event)
+	}
 </script>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col">
 	<div>
 		<div class="subtext flex">
 			<div>
@@ -56,8 +96,18 @@
 			{/each}
 		</div>
 	</div>
-	<img class="my-5 max-w-xl rounded object-fill" src={image ? image[0] : "Image"} alt="Post" />
-	<article class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl">
-		<SvelteMarkdown source={post.content} />
-	</article>
+	<div class="flex flex-col items-center">
+		<img class="my-5 max-w-xl rounded object-fill" src={image ? image[0] : "Image"} alt="Post" />
+		<article class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl">
+			<SvelteMarkdown source={post.content} />
+		</article>
+	</div>
+	<div class="flex mt-8">
+		<div class="mr-4" on:click={() => react("+")}>
+			<Reaction label="👍" reactions={reactions.filter((v) => v.content === "👍" || v.content === "+" || v.content === "❤️" || v.content === "🤙")} />
+		</div>
+		<div on:click={() => react("-")}>
+			<Reaction label="👎" reactions={reactions.filter((v) => v.content === "👎" || v.content === "-" || v.content === "💔")} />
+		</div>
+	</div>
 </div>
