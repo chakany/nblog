@@ -12,6 +12,7 @@
 	import Reaction from "$lib/Reaction.svelte";
 	import { nostr } from "$lib/stores";
 	import { browser } from "$app/environment";
+	import { PUBLIC_REACTIONS } from "$env/static/public"
 
 	export let post: Event;
 
@@ -102,12 +103,14 @@
 			<SvelteMarkdown source={post.content} />
 		</article>
 	</div>
-	<div class="flex mt-8">
-		<div class="mr-4" on:click={() => react("+")}>
-			<Reaction label="👍" reactions={reactions.filter((v) => v.content === "👍" || v.content === "+" || v.content === "❤️" || v.content === "🤙")} />
+	{#if PUBLIC_REACTIONS.toLowerCase() === "true"}
+		<div class="flex mt-8">
+			<div class="mr-4" on:click={() => react("+")}>
+				<Reaction label="👍" reactions={reactions.filter((v) => v.content === "👍" || v.content === "+" || v.content === "❤️" || v.content === "🤙")} />
+			</div>
+			<div on:click={() => react("-")}>
+				<Reaction label="👎" reactions={reactions.filter((v) => v.content === "👎" || v.content === "-" || v.content === "💔")} />
+			</div>
 		</div>
-		<div on:click={() => react("-")}>
-			<Reaction label="👎" reactions={reactions.filter((v) => v.content === "👎" || v.content === "-" || v.content === "💔")} />
-		</div>
-	</div>
+	{/if}
 </div>
