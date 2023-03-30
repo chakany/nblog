@@ -38,6 +38,6 @@
 		</div>
 	</div>
 	{#if image}
-		<img class="invisible sm:visible ml-auto h-20 w-20 rounded object-cover" src={image[0]} alt="Post Image" />
+		<img class="hidden sm:inline ml-auto h-20 w-20 rounded object-cover" src={image[0]} alt="Post Image" />
 	{/if}
 </div>
