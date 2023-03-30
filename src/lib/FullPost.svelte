@@ -65,50 +65,52 @@
 </script>
 
 <div class="flex flex-col">
-	<div>
-		<div class="subtext flex">
-			<div>
-				Published {formatDistance(
-					new Date(published_at ? Number(published_at[0]) * 1000 : 0),
-					new Date(),
-					{ addSuffix: true }
+	<article>
+		<div>
+			<div class="flex subtext text-sm md:text-md lg:text-lg">
+				<div>
+					Published {formatDistance(
+						new Date(published_at ? Number(published_at[0]) * 1000 : 0),
+						new Date(),
+						{ addSuffix: true }
 				)}
-				{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
-					| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
+					{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
+						| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
 						addSuffix: true,
 					})}
-				{/if}
-				| {readingTime(post.content)} min read
-			</div>
-			<div class="my-auto ml-auto flex">
-				<div class="cursor-pointer" on:click={() => navigator.clipboard.writeText(url)}>
-					<Fa icon={faLink} />
+					{/if}
+					| {readingTime(post.content)} min read
 				</div>
-				<a class="ml-2" href="https://twitter.com/intent/tweet?url={url}">
-					<Fa icon={faTwitter} />
-				</a>
+				<div class="my-auto ml-auto flex">
+					<div class="cursor-pointer" on:click={() => navigator.clipboard.writeText(url)}>
+						<Fa icon={faLink} />
+					</div>
+					<a aria-label="Share to Twitter" class="ml-2" href="https://twitter.com/intent/tweet?url={url}">
+						<Fa icon={faTwitter} />
+					</a>
+				</div>
+			</div>
+			<h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold">{title ? title[0] : "Title"}</h1>
+			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
+			<div class="mt-2 flex">
+				{#each post.tags.filter((v) => v[0] === "t") as tag}
+					<span class="mr-3"><Tag name={tag[1]} /></span>
+				{/each}
 			</div>
 		</div>
-		<h1 class="text-5xl font-extrabold">{title ? title[0] : "Title"}</h1>
-		<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
-		<div class="mt-2 flex">
-			{#each post.tags.filter((v) => v[0] === "t") as tag}
-				<span class="mr-3"><Tag name={tag[1]} /></span>
-			{/each}
+		<div class="flex flex-col items-center">
+			<img
+					class="my-5 max-w-sm sm:max-w-md md:max-w-lg xl:max-w-2xl rounded object-fit"
+					src={image ? image[0] : "Image"}
+					alt="Post"
+			/>
+			<div
+					class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
+			>
+				<SvelteMarkdown source={post.content} />
+			</div>
 		</div>
-	</div>
-	<div class="flex flex-col items-center">
-		<img
-			class="my-5 max-w-xl rounded object-fill"
-			src={image ? image[0] : "Image"}
-			alt="Post"
-		/>
-		<article
-			class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
-		>
-			<SvelteMarkdown source={post.content} />
-		</article>
-	</div>
+	</article>
 	{#if PUBLIC_REACTIONS.toLowerCase() === "true"}
 		<div class="mt-8 flex">
 			<div class="mr-4" on:click={() => react("+")}>
