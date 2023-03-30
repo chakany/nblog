@@ -1,5 +1,5 @@
 import "websocket-polyfill";
-import { SimplePool, type Event, getEventHash } from "nostr-tools";
+import { SimplePool, type Event } from "nostr-tools";
 import { PUBLIC_RELAYS, PUBLIC_PUBKEYS } from "$env/static/public";
 import { browser } from "$app/environment";
 

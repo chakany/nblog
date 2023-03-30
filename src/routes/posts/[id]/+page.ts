@@ -21,7 +21,7 @@ export const load = (async ({ params, setHeaders }) => {
 		kinds: [30023],
 		"#d": [params.id],
 		authors: nostrClient.pubkeys,
-	})
+	});
 	setHeaders({
 		"cache-control": "public, max-age: 3600",
 	});

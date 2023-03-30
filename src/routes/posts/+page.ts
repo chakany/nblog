@@ -36,7 +36,7 @@ export const load = (async ({ setHeaders }) => {
 	});
 
 	return {
-		posts: new Promise<Event[]>((resolve, reject) => {
+		posts: new Promise<Event[]>((resolve) => {
 			sub.on("eose", () => {
 				if (posts.length == 0) {
 					resolve(posts);

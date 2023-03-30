@@ -2,7 +2,7 @@
 	import "../app.css";
 	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
-	import {onMount} from "svelte";
+	import { onMount } from "svelte";
 
 	let url: string;
 	onMount(() => {

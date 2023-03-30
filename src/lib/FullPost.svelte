@@ -1,5 +1,5 @@
 <script lang="ts">
-	// @ts-ignore
+	// @ts-expect-error weird error, don't know why it's there
 	import { formatDistance } from "date-fns";
 	import { type Event } from "nostr-tools";
 	import SvelteMarkdown from "svelte-markdown";
@@ -67,17 +67,17 @@
 <div class="flex flex-col">
 	<article>
 		<div>
-			<div class="flex subtext text-sm md:text-md lg:text-lg">
+			<div class="subtext md:text-md flex text-sm lg:text-lg">
 				<div>
 					Published {formatDistance(
 						new Date(published_at ? Number(published_at[0]) * 1000 : 0),
 						new Date(),
 						{ addSuffix: true }
-				)}
+					)}
 					{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
 						| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
-						addSuffix: true,
-					})}
+							addSuffix: true,
+						})}
 					{/if}
 					| {readingTime(post.content)} min read
 				</div>
@@ -85,14 +85,20 @@
 					<div class="cursor-pointer" on:click={() => navigator.clipboard.writeText(url)}>
 						<Fa icon={faLink} />
 					</div>
-					<a aria-label="Share to Twitter" class="ml-2" href="https://twitter.com/intent/tweet?url={url}">
+					<a
+						aria-label="Share to Twitter"
+						class="ml-2"
+						href="https://twitter.com/intent/tweet?url={url}"
+					>
 						<Fa icon={faTwitter} />
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold">{title ? title[0] : "Title"}</h1>
+			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
+				{title ? title[0] : "Title"}
+			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
-			<div class="flex flex-wrap gap-2 mt-2">
+			<div class="mt-2 flex flex-wrap gap-2">
 				{#each post.tags.filter((v) => v[0] === "t") as tag}
 					<Tag name={tag[1]} />
 				{/each}
@@ -100,12 +106,12 @@
 		</div>
 		<div class="flex flex-col items-center">
 			<img
-					class="my-5 max-w-sm sm:max-w-md md:max-w-lg xl:max-w-2xl rounded object-fit"
-					src={image ? image[0] : "Image"}
-					alt="Post"
+				class="object-fit my-5 max-w-sm rounded sm:max-w-md md:max-w-lg xl:max-w-2xl"
+				src={image ? image[0] : "Image"}
+				alt="Post"
 			/>
 			<div
-					class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
+				class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
 			>
 				<SvelteMarkdown source={post.content} />
 			</div>
