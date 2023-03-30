@@ -31,9 +31,9 @@
 			<h2 class="text-xl xl:text-3xl font-bold">{title ? title[0] : "Title"}</h2>
 			<p class="subtext">{summary ? summary[0] : "Summary"}</p>
 		</a>
-		<div class="mt-2 flex">
+		<div class="flex flex-wrap gap-2 mt-2">
 			{#each post.tags.filter((v) => v[0] === "t") as tag}
-				<span class="mr-3"><Tag name={tag[1]} /></span>
+				<Tag name={tag[1]} />
 			{/each}
 		</div>
 	</div>
