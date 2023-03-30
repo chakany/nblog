@@ -27,7 +27,7 @@
 </div>
 <div class="flex">
 	<div class="flex flex-col">
-		<a class="flex cursor-pointer flex-col" href="/posts/{post.id}" target="_self">
+		<a class="flex cursor-pointer flex-col" href="/posts/{getTagValues(post.tags, 'd')[0]}" target="_self">
 			<h2 class="text-xl xl:text-3xl font-bold">{title ? title[0] : "Title"}</h2>
 			<p class="subtext">{summary ? summary[0] : "Summary"}</p>
 		</a>

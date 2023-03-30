@@ -17,14 +17,21 @@ export const load = (async ({ params, setHeaders }) => {
 			message: "Couldn't connect to relays",
 		});
 	}
+	// TODO: remove
+	const idEvent = await nostrClient.get(nostrClient.relays, {
+		kinds: [30023],
+		ids: [params.id],
+		authors: nostrClient.pubkeys,
+	})
+	const sEvent = await nostrClient.get(nostrClient.relays, {
+		kinds: [30023],
+		"#d": [params.id],
+		authors: nostrClient.pubkeys,
+	})
 	setHeaders({
 		"cache-control": "public, max-age: 3600",
 	});
 	return {
-		post: await nostrClient.get(nostrClient.relays, {
-			kinds: [30023],
-			ids: [params.id],
-			authors: nostrClient.pubkeys,
-		}),
+		post: idEvent ?? sEvent,
 	};
 }) satisfies PageLoad;

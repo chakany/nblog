@@ -23,7 +23,7 @@
 
 	let url: string;
 	onMount(() => {
-		url = window.location.host + "/posts/" + post.id;
+		url = window.location.href;
 	});
 
 	let reactions: Event[] = [];
