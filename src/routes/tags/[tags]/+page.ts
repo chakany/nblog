@@ -10,11 +10,11 @@ export const csr = false;
 export const load = (async ({ params, setHeaders }) => {
 	const nostrClient = new Nostr();
 	try {
+		await nostrClient.connect();
+	} catch (err) {
 		setHeaders({
 			"cache-control": "no-cache",
 		});
-		await nostrClient.connect();
-	} catch (err) {
 		throw error(500, {
 			message: "Couldn't connect to relays",
 		});
