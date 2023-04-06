@@ -23,7 +23,14 @@
 
 	let url: string;
 	onMount(() => {
-		url = window.location.href;
+		// In cases where a full-length post is being displayed on the homepage
+		// we want to copy the correct url, check if we are on posts path or not
+		// if not, then without this we would return ex the home path and not the post path
+		if (window.location.href.includes("posts")) {
+			url = window.location.href;
+		} else {
+			url = window.location.href + "posts/" + getTagValues(post.tags, "d")[0];
+		}
 	});
 
 	let reactions: Event[] = [];
