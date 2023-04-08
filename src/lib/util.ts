@@ -5,7 +5,8 @@ export function readingTime(text: string): number {
 }
 
 export function getTagValues(tags: any[], name: string): any[] | null {
-	const [tagName, ...values] = tags.find((v) => v[0] === name);
-	if (!tagName) return null;
+	const found = tags.find((v) => v[0] === name);
+	if (!found) return null;
+	const [, ...values] = found;
 	return values;
 }
