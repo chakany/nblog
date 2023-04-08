@@ -56,6 +56,7 @@
 			tags: [
 				["client", "nblog"],
 				["e", post.id],
+				["p", post.pubkey]
 			],
 			created_at: Math.floor(Date.now() / 1000),
 			content: reaction,
