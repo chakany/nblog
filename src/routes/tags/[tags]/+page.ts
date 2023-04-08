@@ -1,7 +1,7 @@
 import type { PageLoad } from "./$types";
 import Nostr from "$lib/Nostr";
 import type { Event } from "nostr-tools";
-import { getTagValues } from "$lib/util";
+import { getTagValues, removeDuplicates } from "$lib/util";
 import { error } from "@sveltejs/kit";
 
 export const ssr = true;
@@ -31,7 +31,7 @@ export const load = (async ({ params, setHeaders }) => {
 		},
 	]);
 
-	const posts: Event[] = [];
+	let posts: Event[] = [];
 
 	sub.on("event", (event: Event) => {
 		posts.push(event);
@@ -41,6 +41,10 @@ export const load = (async ({ params, setHeaders }) => {
 		posts: new Promise<Event[]>((resolve) => {
 			sub.on("eose", () => {
 				sub.unsub();
+				if (posts.length == 0) {
+					resolve(posts);
+				}
+				posts = removeDuplicates(posts);
 				posts.sort(
 					(a, b) =>
 						Number(getTagValues(b.tags, "published_at")![0]) -
