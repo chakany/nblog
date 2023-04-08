@@ -46,7 +46,6 @@
 			},
 		]);
 		sub.on("event", (event: Event) => {
-			console.log(event);
 			reactions = [...reactions, event];
 		});
 	}
