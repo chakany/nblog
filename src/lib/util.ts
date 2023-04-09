@@ -16,33 +16,21 @@ export function getTagValues(tags: string[][], name: string): any[] | null {
 // Used in the case where relays might not return replaceable events properly.
 // Ex: multiple copies of the same event are returned.
 export function removeDuplicates(events: Event[]): Event[] {
-	const newEvents: Event[] = [];
-	// TODO: this is provably very inefficient
-	for (const top of events) {
-		const topTag = getTagValues(top.tags, "d");
-		if (!topTag) break;
-
-		for (const bottom of events) {
-			const bottomTag = getTagValues(bottom.tags, "d");
-			if (!bottomTag) break;
-
-			if (topTag[0] === bottomTag[0] && top.id !== bottom.id) {
-				if (top.created_at > bottom.created_at && !newEvents.includes(top)) {
-					newEvents.push(top);
-				} else if (top.created_at < bottom.created_at && !newEvents.includes(bottom)) {
-					newEvents.push(bottom);
-				}
-
-				break;
-			}
-			if (!newEvents.includes(top)) {
-				newEvents.push(top);
-			}
-			if (!newEvents.includes(bottom)) {
-				newEvents.push(bottom);
-			}
+	const newPosts: Event[] = [];
+	for (const e of events) {
+		if (newPosts.find((v) => getTagValues(v.tags, "d")![0] === getTagValues(e.tags, "d")![0])) {
+			break;
 		}
+		const allD = events.filter(
+			(v) => getTagValues(v.tags, "d")![0] === getTagValues(e.tags, "d")![0]
+		);
+		allD.sort(
+			(a, b) =>
+				Number(getTagValues(b.tags, "published_at")![0]) -
+				Number(getTagValues(a.tags, "published_at")![0])
+		);
+		newPosts.push(allD[0]);
 	}
 
-	return newEvents;
+	return newPosts;
 }
