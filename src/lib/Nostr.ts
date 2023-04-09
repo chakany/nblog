@@ -11,6 +11,19 @@ export default class Nostr extends SimplePool {
 	constructor() {
 		super();
 		this.relays = PUBLIC_RELAYS.split(",");
+		// If we are connected on web browser, then add more relays
+		if (browser) {
+			this.relays = [
+				...this.relays,
+				"wss://relay.damus.io",
+				"wss://relay.snort.social",
+				"wss://eden.nostr.land",
+				"wss://puravida.nostr.land",
+				"wss://sg.qemura.xyz",
+				"wss://offchain.pub",
+				"wss://nostr.mom",
+			];
+		}
 		this.pubkeys = PUBLIC_PUBKEYS.split(",");
 		this.pubkey = "";
 	}
