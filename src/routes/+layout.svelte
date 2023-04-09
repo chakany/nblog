@@ -17,7 +17,7 @@
 	<link rel="icon" type="image/x-icon" href={PUBLIC_PICTURE} />
 	<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFF" />
 	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-	<meta name="description" content="Test" />
+	<meta name="description" content="Home Page" />
 </svelte:head>
 
 <header>
