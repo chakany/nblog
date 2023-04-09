@@ -28,10 +28,10 @@ export default class Nostr extends SimplePool {
 		this.pubkey = "";
 	}
 
-	public async connect() {
-		for (let i = 0; i < this.relays.length; i++) {
+	public async connect(relays: string[]) {
+		for (let i = 0; i < relays.length; i++) {
 			try {
-				await this.ensureRelay(this.relays[i]);
+				await this.ensureRelay(relays[i]);
 			} catch (error) {
 				// GFY
 			}

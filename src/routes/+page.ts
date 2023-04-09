@@ -3,13 +3,15 @@ import Nostr from "$lib/Nostr";
 import type { Event } from "nostr-tools";
 import { getTagValues, removeDuplicates } from "$lib/util";
 import { error } from "@sveltejs/kit";
+import { PUBLIC_RELAYS } from "$env/static/public";
 
 export const ssr = true;
 
 export const load = (async ({ setHeaders }) => {
 	const nostrClient = new Nostr();
+	const relays = PUBLIC_RELAYS.split(",");
 	try {
-		await nostrClient.connect();
+		await nostrClient.connect(relays);
 	} catch (err) {
 		setHeaders({
 			"cache-control": "no-cache",
@@ -21,7 +23,7 @@ export const load = (async ({ setHeaders }) => {
 	setHeaders({
 		"cache-control": "public, max-age: 3600",
 	});
-	const sub = nostrClient.sub(nostrClient.relays, [
+	const sub = nostrClient.sub(relays, [
 		{
 			kinds: [30023],
 			authors: nostrClient.pubkeys,

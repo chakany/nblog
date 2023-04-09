@@ -1,14 +1,16 @@
 import type { PageLoad } from "./$types";
 import Nostr from "$lib/Nostr";
 import { error } from "@sveltejs/kit";
+import { PUBLIC_RELAYS } from "$env/static/public";
 
 export const ssr = true;
 export const csr = true;
 
 export const load = (async ({ params, setHeaders }) => {
 	const nostrClient = new Nostr();
+	const relays = PUBLIC_RELAYS.split(",");
 	try {
-		await nostrClient.connect();
+		await nostrClient.connect(relays);
 	} catch (err) {
 		setHeaders({
 			"cache-control": "no-cache",
@@ -17,7 +19,7 @@ export const load = (async ({ params, setHeaders }) => {
 			message: "Couldn't connect to relays",
 		});
 	}
-	const sEvent = await nostrClient.get(nostrClient.relays, {
+	const sEvent = await nostrClient.get(relays, {
 		kinds: [30023],
 		"#d": [params.id],
 		authors: nostrClient.pubkeys,
