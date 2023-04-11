@@ -6,6 +6,7 @@
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
+	import { spring } from 'svelte/motion';
 	import { faLink } from "@fortawesome/free-solid-svg-icons";
 	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
@@ -72,6 +73,9 @@
 
 		await $nostr.publish($nostr.relays, event);
 	}
+
+	let copyIconScale = spring(1);
+	let tweetIconScale = spring(1);
 </script>
 
 <div class="flex flex-col">
@@ -92,15 +96,17 @@
 					| {readingTime(post.content)} min read
 				</div>
 				<div class="my-auto ml-auto flex">
-					<div class="cursor-pointer" on:click={() => navigator.clipboard.writeText(url)}>
-						<Fa icon={faLink} />
+					<div class="cursor-pointer" on:mousedown={() => copyIconScale.set(0.8)} on:mouseup={() => copyIconScale.set(1)} on:click={() => navigator.clipboard.writeText(url)}>
+						<Fa icon={faLink} scale={$copyIconScale} />
 					</div>
 					<a
 						aria-label="Share to Twitter"
 						class="ml-2"
 						href="https://twitter.com/intent/tweet?url={url}"
+						on:mousedown={() => tweetIconScale.set(0.8)}
+						on:mouseup={() => tweetIconScale.set(1)}
 					>
-						<Fa icon={faTwitter} />
+						<Fa icon={faTwitter} scale={$tweetIconScale} />
 					</a>
 				</div>
 			</div>
