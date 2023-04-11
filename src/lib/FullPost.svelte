@@ -36,7 +36,7 @@
 
 	let reactions: Event[] = [];
 	if (browser) {
-		$nostr.connect();
+		$nostr.connect($nostr.relays);
 	}
 	// Reactions
 	if (browser && post) {
