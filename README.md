@@ -1,7 +1,7 @@
 # nblog
 
 nostr-based ghost blog
-See a running demo at https://blog.jacany.com
+See a running demo at https://hello-ndk.vercel.app
 
 ## Setup
 
