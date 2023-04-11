@@ -20,6 +20,7 @@
 	const title = getTagValues(post.tags, "title");
 	const summary = getTagValues(post.tags, "summary");
 	const image = getTagValues(post.tags, "image");
+	const slug = getTagValues(post.tags, "d");
 
 	let url: string;
 	onMount(() => {
@@ -43,6 +44,7 @@
 			{
 				kinds: [7],
 				"#e": [post.id],
+				"#a": [`30023:${post.pubkey}:${slug[0]}`],
 			},
 		]);
 		sub.on("event", (event: Event) => {
@@ -55,6 +57,7 @@
 			kind: 7,
 			tags: [
 				["client", "nblog"],
+				["a", `30023:${post.pubkey}:${slug}`],
 				["e", post.id],
 				["p", post.pubkey]
 			],
