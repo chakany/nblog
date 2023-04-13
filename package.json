@@ -47,7 +47,7 @@
 		"@fortawesome/free-solid-svg-icons": "^6.3.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"date-fns": "^2.29.3",
-		"nostr-tools": "^1.7.4",
+		"nostr-tools": "^1.8.4",
 		"svelte-fa": "^3.0.3",
 		"svelte-markdown": "^0.2.3"
 	}
