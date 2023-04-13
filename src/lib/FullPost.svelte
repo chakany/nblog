@@ -6,7 +6,7 @@
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
-	import { spring } from 'svelte/motion';
+	import { spring } from "svelte/motion";
 	import { faLink } from "@fortawesome/free-solid-svg-icons";
 	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
@@ -60,7 +60,7 @@
 				["client", "nblog"],
 				["a", `30023:${post.pubkey}:${slug}`],
 				["e", post.id],
-				["p", post.pubkey]
+				["p", post.pubkey],
 			],
 			created_at: Math.floor(Date.now() / 1000),
 			content: reaction,
@@ -96,7 +96,12 @@
 					| {readingTime(post.content)} min read
 				</div>
 				<div class="my-auto ml-auto flex">
-					<div class="cursor-pointer" on:mousedown={() => copyIconScale.set(0.8)} on:mouseup={() => copyIconScale.set(1)} on:click={() => navigator.clipboard.writeText(url)}>
+					<div
+						class="cursor-pointer"
+						on:mousedown={() => copyIconScale.set(0.8)}
+						on:mouseup={() => copyIconScale.set(1)}
+						on:click={() => navigator.clipboard.writeText(url)}
+					>
 						<Fa icon={faLink} scale={$copyIconScale} />
 					</div>
 					<a

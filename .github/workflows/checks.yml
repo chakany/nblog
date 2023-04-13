@@ -5,28 +5,28 @@ on:
     pull_request:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'yarn'
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    - run: yarn lint
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js 18.x
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18.x
+                  cache: "yarn"
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - run: yarn lint
 
-  check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18.x
-        cache: 'yarn'
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    - run: yarn check
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js 18.x
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18.x
+                  cache: "yarn"
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - run: yarn check

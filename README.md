@@ -30,7 +30,7 @@ Configuration is done with enviroment variables.
 
 -   `PUBLIC_PUBKEYS` List of **HEX** pubkeys to fetch events for seperated by a `,`
 -   `PUBLIC_RELAYS` List of relay URLs to connect to seperated by a `,`.
-    - It's best to keep this list as small as possible. Less relays = faster blog and less room for errors (updates not being published)
+    -   It's best to keep this list as small as possible. Less relays = faster blog and less room for errors (updates not being published)
 -   `PUBLIC_NAME` A name for your blog. ex: `nym's blog`
 -   `PUBLIC_PICTURE` A Picture URL for your blog, used in favicon and header.
 -   `PUBLIC_REACTIONS` Controls if you want reactions underneath your posts. Can either be `true` or `false`.
