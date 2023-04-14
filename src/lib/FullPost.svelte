@@ -2,7 +2,7 @@
 	// @ts-expect-error weird error, don't know why it's there
 	import { formatDistance } from "date-fns";
 	import { type Event } from "nostr-tools";
-	import SvelteMarkdown from "svelte-markdown";
+	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
@@ -76,6 +76,8 @@
 
 	let copyIconScale = spring(1);
 	let tweetIconScale = spring(1);
+	const converter = new showdown.Converter();
+	const postContent = converter.makeHtml(post.content);
 </script>
 
 <div class="flex flex-col">
@@ -134,7 +136,7 @@
 			<div
 				class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
 			>
-				<SvelteMarkdown source={post.content} />
+				{@html postContent}
 			</div>
 		</div>
 	</article>
