@@ -44,6 +44,7 @@ const buildFeed = (events: Event[], origin: string) => {
 		const title = getTagValues(event.tags, "title");
 		const summary = getTagValues(event.tags, "summary");
 		const slug = getTagValues(event.tags, "d");
+		const image = getTagValues(event.tags, "image");
 		const publishedAt = Number(getTagValues(event.tags, "published_at")![0]);
 		const url = origin + "/posts/" + slug![0];
 		const post = [
@@ -52,8 +53,9 @@ const buildFeed = (events: Event[], origin: string) => {
 			`<title>${title ? title![0] : "No Title"}</title>`,
 			`<summary>${summary ? summary![0] : "No Description"}</summary>`,
 			`<link rel="self" href="${url}" />`,
-			`<content type="application/html">${escapeHtml(
-				converter.makeHtml(event.content)
+			`<content type="html">${escapeHtml(
+				(image ? `<img src="${image[0]}" alt="Banner" />\n` : "") +
+					converter.makeHtml(event.content)
 			)}</content>`,
 			`<published>${convertTime(publishedAt)}</published>`,
 			publishedAt != event.created_at ? `<updated>${convertTime(publishedAt)}</updated>` : "",
