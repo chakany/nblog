@@ -27,13 +27,16 @@ const buildFeed = (events: Event[], origin: string) => {
 			return map[m];
 		});
 	};
+	// MUH CANONICAL URLS
+	origin = origin + "/";
 	// start the structure, we are using arrays because they are dead simple and w e can combine them later.
 	let feed = [
 		'<?xml version="1.0" encoding="UTF-8" ?>',
 		'<feed xmlns="http://www.w3.org/2005/Atom">',
 		`<id>${origin}</id>`,
 		`<title>${PUBLIC_NAME}</title>`,
-		`<link rel="self" href="${origin}" />`,
+		`<link rel="alternate" href="${origin + "posts"}" />`,
+		`<link rel="self" href="${origin + "atom"}" />`,
 		`<updated>${convertTime(events[0].created_at)}</updated>`,
 		`<generator version="${version}">nblog</generator>`,
 		`<subtitle>Powered by nblog</subtitle>`,
