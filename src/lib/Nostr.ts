@@ -47,12 +47,15 @@ export default class Nostr extends SimplePool {
 	}
 
 	public async signEvent(event: Event) {
-		// @ts-expect-error we are checking
-		if (browser && window.nostr) {
-			// @ts-expect-error it's there
-			event = await window.nostr.signEvent(event);
-			this.pubkey = event.pubkey;
-			return event;
+		if (browser) {
+			// @ts-expect-error we are checking
+			if (window.nostr) {
+				// @ts-expect-error it's there
+				event = await window.nostr.signEvent(event);
+				this.pubkey = event.pubkey;
+				return event;
+			}
+			alert("No NIP-07 compatible extension found.");
 		}
 
 		return null;
