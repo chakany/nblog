@@ -1,14 +1,11 @@
-import type { PageLoad } from "./$types";
+import type { PageServerLoad } from "./$types";
 import Nostr from "$lib/Nostr";
 import type { Event } from "nostr-tools";
 import { getTagValues, removeDuplicates } from "$lib/util";
 import { error } from "@sveltejs/kit";
 import { PUBLIC_RELAYS } from "$env/static/public";
 
-export const ssr = true;
-export const csr = false;
-
-export const load = (async ({ setHeaders }) => {
+export const load = (async ({ params, setHeaders }) => {
 	const nostrClient = new Nostr();
 	const relays = PUBLIC_RELAYS.split(",");
 	try {
@@ -24,9 +21,11 @@ export const load = (async ({ setHeaders }) => {
 	setHeaders({
 		"cache-control": "public, max-age: 3600",
 	});
+	const tagArr = params.tags.split(",");
 	const sub = nostrClient.sub(relays, [
 		{
 			kinds: [30023],
+			"#t": tagArr,
 			authors: nostrClient.pubkeys,
 		},
 	]);
@@ -53,5 +52,6 @@ export const load = (async ({ setHeaders }) => {
 				resolve(posts);
 			});
 		}),
+		tags: tagArr,
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;

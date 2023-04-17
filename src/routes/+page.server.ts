@@ -1,4 +1,4 @@
-import type { PageLoad } from "./$types";
+import type { PageServerLoad } from "./$types";
 import Nostr from "$lib/Nostr";
 import type { Event } from "nostr-tools";
 import { getTagValues, removeDuplicates } from "$lib/util";
@@ -53,4 +53,4 @@ export const load = (async ({ setHeaders }) => {
 			});
 		}),
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;
