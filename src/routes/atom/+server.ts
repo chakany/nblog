@@ -50,6 +50,7 @@ const buildFeed = (events: Event[], origin: string) => {
 		const image = getTagValues(event.tags, "image");
 		const publishedAt = Number(getTagValues(event.tags, "published_at")![0]);
 		const url = origin + "/posts/" + slug![0];
+		const pubkey = nip19.npubEncode(event.pubkey);
 		const post = [
 			`<entry>`,
 			`<id>${url}</id>`,
@@ -61,6 +62,10 @@ const buildFeed = (events: Event[], origin: string) => {
 					converter.makeHtml(event.content)
 			)}</content>`,
 			`<published>${convertTime(publishedAt)}</published>`,
+			`<author>`,
+			`<name>${pubkey}</name>`,
+			`<uri>https://nosta.me/${pubkey}</uri>`,
+			`</author`,
 			publishedAt != event.created_at ? `<updated>${convertTime(publishedAt)}</updated>` : "",
 		];
 		for (const tag of event.tags.filter((v) => v[0] === "t")) {
