@@ -125,7 +125,7 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
+			<h1 class="text-2xl underline font-extrabold sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
