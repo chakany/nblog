@@ -40,7 +40,7 @@
 </main>
 
 <hr />
-<footer class="my-6 mx-6 flex text-xs">
+<footer class="mx-6 my-6 flex text-xs">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a>
 	</div>
