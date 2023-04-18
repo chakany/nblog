@@ -45,7 +45,7 @@
 		<img
 			class="ml-auto hidden h-20 w-20 rounded object-cover sm:inline"
 			src={image[0]}
-			alt="Post Image"
+			alt="Banner"
 		/>
 	{/if}
 </div>

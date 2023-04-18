@@ -2,6 +2,8 @@
 	import "../app.css";
 	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
+	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
+	import Fa from "svelte-fa";
 	import { onMount } from "svelte";
 
 	export const ssr = true;
@@ -34,6 +36,9 @@
 				<li><a class="underline" href="/posts" target="_self">Posts</a></li>
 			</ul>
 		</div>
+		<a href="/atom" target="_self" class="my-auto ml-auto flex">
+			<Fa icon={faSquareRss} scale={2} />
+		</a>
 	</nav>
 </header>
 <hr />
@@ -43,7 +48,7 @@
 </main>
 
 <hr />
-<footer class="my-6 mx-6 flex text-xs">
+<footer class="mx-6 my-6 flex text-xs">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a>
 	</div>

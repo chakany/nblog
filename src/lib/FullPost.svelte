@@ -2,7 +2,7 @@
 	// @ts-expect-error weird error, don't know why it's there
 	import { formatDistance } from "date-fns";
 	import { nip19, nip05, type Event } from "nostr-tools";
-	import SvelteMarkdown from "svelte-markdown";
+	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
@@ -36,7 +36,7 @@
 	});
 
 	let reactions: Event[] = [];
-	let author: any;
+	let author: unknown;
 	if (browser) {
 		$nostr.connect($nostr.relays);
 	}
@@ -50,14 +50,12 @@
 			},
 			{
 				kinds: [0],
-				authors: [post.pubkey]
-			}
+				authors: [post.pubkey],
+			},
 		]);
 		sub.on("event", (event: Event) => {
-			if (event.kind == 7)
-				reactions = [...reactions, event];
-			else
-				author = JSON.parse(event.content)
+			if (event.kind == 7) reactions = [...reactions, event];
+			else author = JSON.parse(event.content);
 		});
 	}
 
@@ -84,8 +82,12 @@
 
 	let copyIconScale = spring(1);
 	let tweetIconScale = spring(1);
+
+	const converter = new showdown.Converter();
+	const postContent = converter.makeHtml(post.content);
+
 	let showPubkey = false;
-	const npub = nip19.npubEncode(post.pubkey)
+	const npub = nip19.npubEncode(post.pubkey);
 </script>
 
 <div class="flex flex-col">
@@ -106,6 +108,7 @@
 					| {readingTime(post.content)} min read
 				</div>
 				<div class="my-auto ml-auto flex">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class="cursor-pointer"
 						on:mousedown={() => copyIconScale.set(0.8)}
@@ -125,13 +128,19 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl underline font-extrabold sm:text-3xl md:text-4xl">
+			<h1 class="text-2xl font-extrabold underline sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
-			<div class="flex my-3">
-				<img class="rounded my-auto w-14 h-14" src={author && author.picture ? author.picture : `https://robohash.org/${post.pubkey}?sets=1`} alt="Profile" />
-				<div class="flex flex-col my-auto pl-3">
+			<div class="my-3 flex">
+				<img
+					class="my-auto h-14 w-14 rounded"
+					src={author && author.picture
+						? author.picture
+						: `https://robohash.org/${post.pubkey}?sets=1`}
+					alt="Profile"
+				/>
+				<div class="my-auto flex flex-col pl-3">
 					<div class="flex gap-1.5">
 						<div>
 							{#if author && author.display_name}
@@ -144,22 +153,23 @@
 							<div class="flex gap-1.5">
 								{author.nip05}
 								<span class="my-auto">
-										{#await nip05.queryProfile(author.nip05)}
-											<Fa icon={faEllipsis} />
-										{:then profile}
-											{#if profile.pubkey === post.pubkey}
-												<Fa icon={faCheck} />
-											{:else}
-												<Fa icon={faX} />
-											{/if}
-										{:catch error}
+									{#await nip05.queryProfile(author.nip05)}
+										<Fa icon={faEllipsis} />
+									{:then profile}
+										{#if profile.pubkey === post.pubkey}
+											<Fa icon={faCheck} />
+										{:else}
 											<Fa icon={faX} />
-										{/await}
-									</span>
+										{/if}
+									{:catch error}
+										<Fa icon={faX} />
+									{/await}
+								</span>
 							</div>
 						{/if}
 					</div>
-					<span class="cursor-pointer" on:click={() => showPubkey = true}>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<span class="cursor-pointer" on:click={() => (showPubkey = true)}>
 						{#if showPubkey}
 							<a target="_self" href={"https://nosta.me/" + npub}>{npub}</a>
 						{:else}
@@ -183,12 +193,13 @@
 			<div
 				class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
 			>
-				<SvelteMarkdown source={post.content} />
+				{@html postContent}
 			</div>
 		</div>
 	</article>
 	{#if PUBLIC_REACTIONS.toLowerCase() === "true"}
 		<div class="mt-8 flex">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="mr-4" on:click={() => react("+")}>
 				<Reaction
 					label="👍"
@@ -201,6 +212,7 @@
 					)}
 				/>
 			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => react("-")}>
 				<Reaction
 					label="👎"

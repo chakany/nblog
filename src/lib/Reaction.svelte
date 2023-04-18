@@ -5,7 +5,7 @@
 </script>
 
 <span
-	class="flex cursor-pointer rounded border border-solid border-black py-1 px-4 dark:border-white"
+	class="flex cursor-pointer rounded border border-solid border-black px-4 py-1 dark:border-white"
 >
 	<span class="mr-2">{reactions.length}</span>
 	<span>{label}</span>
