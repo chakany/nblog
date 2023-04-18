@@ -1,10 +1,7 @@
-import type { PageLoad } from "./$types";
+import type { PageServerLoad } from "./$types";
 import Nostr from "$lib/Nostr";
 import { error } from "@sveltejs/kit";
 import { PUBLIC_RELAYS } from "$env/static/public";
-
-export const ssr = true;
-export const csr = true;
 
 export const load = (async ({ params, setHeaders }) => {
 	const nostrClient = new Nostr();
@@ -30,4 +27,4 @@ export const load = (async ({ params, setHeaders }) => {
 	return {
 		post: sEvent,
 	};
-}) satisfies PageLoad;
+}) satisfies PageServerLoad;

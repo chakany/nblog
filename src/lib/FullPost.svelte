@@ -1,13 +1,13 @@
 <script lang="ts">
 	// @ts-expect-error weird error, don't know why it's there
 	import { formatDistance } from "date-fns";
-	import { type Event } from "nostr-tools";
+	import { nip19, nip05, type Event } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tag from "$lib/Tag.svelte";
 	import Fa from "svelte-fa";
 	import { spring } from "svelte/motion";
-	import { faLink } from "@fortawesome/free-solid-svg-icons";
+	import { faLink, faCheck, faX, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
 	import Reaction from "$lib/Reaction.svelte";
@@ -36,10 +36,11 @@
 	});
 
 	let reactions: Event[] = [];
+	let author: any;
 	if (browser) {
 		$nostr.connect($nostr.relays);
 	}
-	// Reactions
+	// Reactions and profile
 	if (browser && post) {
 		let sub = $nostr.sub($nostr.relays, [
 			{
@@ -47,9 +48,16 @@
 				"#e": [post.id],
 				"#a": [`30023:${post.pubkey}:${slug[0]}`],
 			},
+			{
+				kinds: [0],
+				authors: [post.pubkey]
+			}
 		]);
 		sub.on("event", (event: Event) => {
-			reactions = [...reactions, event];
+			if (event.kind == 7)
+				reactions = [...reactions, event];
+			else
+				author = JSON.parse(event.content)
 		});
 	}
 
@@ -76,8 +84,12 @@
 
 	let copyIconScale = spring(1);
 	let tweetIconScale = spring(1);
+  
 	const converter = new showdown.Converter();
 	const postContent = converter.makeHtml(post.content);
+  
+	let showPubkey = false;
+	const npub = nip19.npubEncode(post.pubkey)
 </script>
 
 <div class="flex flex-col">
@@ -117,10 +129,49 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
+			<h1 class="text-2xl underline font-extrabold sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
+			<div class="flex my-3">
+				<img class="rounded my-auto w-14 h-14" src={author && author.picture ? author.picture : `https://robohash.org/${post.pubkey}?sets=1`} alt="Profile" />
+				<div class="flex flex-col my-auto pl-3">
+					<div class="flex gap-1.5">
+						<div>
+							{#if author && author.display_name}
+								{author.display_name}
+							{:else if author && author.name}
+								@{author.name}
+							{/if}
+						</div>
+						{#if author && author.nip05}
+							<div class="flex gap-1.5">
+								{author.nip05}
+								<span class="my-auto">
+										{#await nip05.queryProfile(author.nip05)}
+											<Fa icon={faEllipsis} />
+										{:then profile}
+											{#if profile.pubkey === post.pubkey}
+												<Fa icon={faCheck} />
+											{:else}
+												<Fa icon={faX} />
+											{/if}
+										{:catch error}
+											<Fa icon={faX} />
+										{/await}
+									</span>
+							</div>
+						{/if}
+					</div>
+					<span class="cursor-pointer" on:click={() => showPubkey = true}>
+						{#if showPubkey}
+							<a target="_self" href={"https://nosta.me/" + npub}>{npub}</a>
+						{:else}
+							Click to show npub
+						{/if}
+					</span>
+				</div>
+			</div>
 			<div class="mt-2 flex flex-wrap gap-2">
 				{#each post.tags.filter((v) => v[0] === "t") as tag}
 					<Tag name={tag[1]} />

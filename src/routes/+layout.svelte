@@ -6,6 +6,9 @@
 	import Fa from "svelte-fa"
 	import { onMount } from "svelte";
 
+	export const ssr = true;
+	export const csr = true;
+
 	let url: string;
 	onMount(() => {
 		url = window.location.href;
