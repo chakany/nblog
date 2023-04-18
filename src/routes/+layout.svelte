@@ -3,7 +3,7 @@
 	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
 	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
-	import Fa from "svelte-fa"
+	import Fa from "svelte-fa";
 	import { onMount } from "svelte";
 
 	export const ssr = true;
@@ -36,7 +36,7 @@
 				<li><a class="underline" href="/posts" target="_self">Posts</a></li>
 			</ul>
 		</div>
-		<a href="/atom" target="_self" class="flex my-auto ml-auto">
+		<a href="/atom" target="_self" class="my-auto ml-auto flex">
 			<Fa icon={faSquareRss} scale={2} />
 		</a>
 	</nav>
