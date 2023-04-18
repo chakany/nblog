@@ -5,6 +5,7 @@
 	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
 	import Fa from "svelte-fa";
 	import { onMount } from "svelte";
+	import { version } from "$app/environment";
 
 	export const ssr = true;
 	export const csr = true;
@@ -50,7 +51,7 @@
 <hr />
 <footer class="mx-6 my-6 flex text-xs">
 	<div class="mr-auto">
-		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a>
+		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
 	</div>
 	<div class="text-right">
 		This website is published under the <a
