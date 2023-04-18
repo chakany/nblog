@@ -44,11 +44,12 @@ export const load = (async ({ params, setHeaders }) => {
 					resolve(posts);
 				}
 				posts = removeDuplicates(posts);
-				posts.sort(
-					(a, b) =>
-						Number(getTagValues(b.tags, "published_at")![0]) -
-						Number(getTagValues(a.tags, "published_at")![0])
-				);
+				posts.sort((a, b) => {
+					const aPub = getTagValues(a.tags, "published_at");
+					const bPub = getTagValues(b.tags, "published_at");
+					if (!aPub || !bPub) throw new Error("Invalid event");
+					return Number(bPub[0]) - Number(aPub[0]);
+				});
 				resolve(posts);
 			});
 		}),

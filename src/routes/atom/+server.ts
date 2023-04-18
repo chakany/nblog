@@ -48,14 +48,16 @@ const buildFeed = (events: Event[], origin: string) => {
 		const summary = getTagValues(event.tags, "summary");
 		const slug = getTagValues(event.tags, "d");
 		const image = getTagValues(event.tags, "image");
-		const publishedAt = Number(getTagValues(event.tags, "published_at")![0]);
-		const url = origin + "/posts/" + slug![0];
+		let publishedAt: string[] | number | null = getTagValues(event.tags, "published_at");
+		if (!slug || !publishedAt) throw new Error("Invalid Event");
+		publishedAt = (publishedAt ? publishedAt[0] : 0) as number;
+		const url = origin + "/posts/" + slug[0];
 		const pubkey = nip19.npubEncode(event.pubkey);
 		const post = [
 			`<entry>`,
 			`<id>${url}</id>`,
-			`<title>${title ? title![0] : "No Title"}</title>`,
-			`<summary>${summary ? summary![0] : "No Description"}</summary>`,
+			`<title>${title ? title[0] : "No Title"}</title>`,
+			`<summary>${summary ? summary[0] : "No Description"}</summary>`,
 			`<link rel="self" href="${url}" />`,
 			`<content type="html">${escapeHtml(
 				(image ? `<img src="${image[0]}" alt="Banner" />\n` : "") +
@@ -120,11 +122,12 @@ export const GET = (async ({ setHeaders, url }) => {
 				resolve(feed);
 			}
 			posts = removeDuplicates(posts);
-			posts.sort(
-				(a, b) =>
-					Number(getTagValues(b.tags, "published_at")![0]) -
-					Number(getTagValues(a.tags, "published_at")![0])
-			);
+			posts.sort((a, b) => {
+				const aPub = getTagValues(a.tags, "published_at");
+				const bPub = getTagValues(b.tags, "published_at");
+				if (!aPub || !bPub) throw new Error("Invalid event");
+				return Number(bPub[0]) - Number(aPub[0]);
+			});
 			feed = buildFeed(posts, url.origin);
 			resolve(feed);
 		});

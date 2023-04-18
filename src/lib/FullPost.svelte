@@ -36,7 +36,7 @@
 	});
 
 	let reactions: Event[] = [];
-	let author: any;
+	let author: unknown;
 	if (browser) {
 		$nostr.connect($nostr.relays);
 	}
@@ -108,6 +108,7 @@
 					| {readingTime(post.content)} min read
 				</div>
 				<div class="my-auto ml-auto flex">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class="cursor-pointer"
 						on:mousedown={() => copyIconScale.set(0.8)}
@@ -167,6 +168,7 @@
 							</div>
 						{/if}
 					</div>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<span class="cursor-pointer" on:click={() => (showPubkey = true)}>
 						{#if showPubkey}
 							<a target="_self" href={"https://nosta.me/" + npub}>{npub}</a>
@@ -197,6 +199,7 @@
 	</article>
 	{#if PUBLIC_REACTIONS.toLowerCase() === "true"}
 		<div class="mt-8 flex">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="mr-4" on:click={() => react("+")}>
 				<Reaction
 					label="👍"
@@ -209,6 +212,7 @@
 					)}
 				/>
 			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => react("-")}>
 				<Reaction
 					label="👎"
