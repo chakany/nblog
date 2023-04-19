@@ -4,7 +4,7 @@
 	import { type Event } from "nostr-tools";
 	import { getTagValues, readingTime } from "$lib/util";
 	export let post: Event;
-	import Tag from "$lib/Tag.svelte";
+	import Tags from "$lib/Tags.svelte";
 
 	const published_at = getTagValues(post.tags, "published_at");
 	const title = getTagValues(post.tags, "title");
@@ -36,9 +36,7 @@
 			<p class="subtext">{summary ? summary[0] : "Summary"}</p>
 		</a>
 		<div class="mt-2 flex flex-wrap gap-2">
-			{#each post.tags.filter((v) => v[0] === "t") as tag}
-				<Tag name={tag[1]} />
-			{/each}
+			<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 		</div>
 	</div>
 	{#if image}

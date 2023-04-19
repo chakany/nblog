@@ -4,7 +4,7 @@
 	import { nip19, nip05, type Event } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
-	import Tag from "$lib/Tag.svelte";
+	import Tags from "$lib/Tags.svelte";
 	import Fa from "svelte-fa";
 	import { spring } from "svelte/motion";
 	import { faLink, faCheck, faX, faEllipsis } from "@fortawesome/free-solid-svg-icons";
@@ -179,9 +179,7 @@
 				</div>
 			</div>
 			<div class="mt-2 flex flex-wrap gap-2">
-				{#each post.tags.filter((v) => v[0] === "t") as tag}
-					<Tag name={tag[1]} />
-				{/each}
+				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 			</div>
 		</div>
 		<div class="flex flex-col items-center">
