@@ -144,10 +144,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.36.0.tgz#9837f768c03a1e4a30bd304a64fb8844f0e72efe"
   integrity sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==
 
-"@fontsource/noto-serif-lao@^4.5.13":
-  version "4.5.13"
-  resolved "https://registry.yarnpkg.com/@fontsource/noto-serif-lao/-/noto-serif-lao-4.5.13.tgz#ddf62c7fcbb42ebb8c4d4d975f6f9af31688b00d"
-  integrity sha512-47iQDm3qNOVbgyvYm4Wr1EbGm85FA4+isOuUaYdAcVgPndqT/6cFez60ZLku80+gpE80MXqqYI3w9dZQGlldwA==
+"@fontsource/source-sans-pro@^4.5.11":
+  version "4.5.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/source-sans-pro/-/source-sans-pro-4.5.11.tgz#06b3f08ef1a5250d78c8198e5a0482b5d87a4d52"
+  integrity sha512-f7iw44q1EjBv3MNcHCGAgrW/QVyweaEouFsJzykPhTOGnZFSwFJRISToXornOmuAy7xUUGiVdqOLiykgZoYB8A==
 
 "@fortawesome/fontawesome-common-types@6.4.0":
   version "6.4.0"

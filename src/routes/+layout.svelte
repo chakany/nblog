@@ -1,6 +1,6 @@
 <script lang="ts">
 	import "../app.css";
-	import "@fontsource/noto-serif-lao";
+	import "@fontsource/source-sans-pro";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
 	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
 	import Fa from "svelte-fa";
@@ -63,7 +63,7 @@
 
 <style lang="postcss">
 	:global(html, body) {
-		font-family: "Noto Serif Lao", serif;
+		font-family: "Source Sans Pro", sans-serif;
 		@apply dark:bg-black dark:text-white;
 	}
 
