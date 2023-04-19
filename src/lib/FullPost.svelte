@@ -92,7 +92,7 @@
 
 <div class="flex flex-col">
 	<article>
-		<div>
+		<div class="px-20">
 			<div class="subtext md:text-md flex text-sm lg:text-lg">
 				<div>
 					Published {formatDistance(
@@ -128,13 +128,13 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl font-extrabold underline sm:text-3xl md:text-4xl">
+			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
 				<img
-					class="my-auto h-14 w-14 rounded"
+					class="my-auto h-14 w-14 rounded-full"
 					src={author && author.picture
 						? author.picture
 						: `https://robohash.org/${post.pubkey}?sets=1`}
@@ -189,7 +189,7 @@
 				alt="Post"
 			/>
 			<div
-				class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
+				class="prose prose-lg dark:prose-invert prose-img:rounded-xl"
 			>
 				{@html postContent}
 			</div>
