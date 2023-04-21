@@ -92,8 +92,8 @@
 
 <div class="flex flex-col">
 	<article>
-		<div class="px-20">
-			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
+		<div class="px-20 font-display">
+			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
@@ -106,26 +106,16 @@
 					alt="Profile"
 				/>
 				<div class="my-auto flex flex-col pl-3">
-					<div class="flex gap-1.5">
-						<div>
-							{#if author && author.display_name}
-								{author.display_name}
-							{:else if author && author.name}
-								@{author.name}
-							{/if}
-						</div>
+					<div class="flex gap-1.5 font-mono">
+						{#if author && author.display_name}
+							{author.display_name}
+						{:else if author && author.name}
+							@{author.name}
+						{/if}
 					</div>
 					<div>
 						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString(undefined)} <span class="subtext">/</span> {readingTime(post.content)} min read
 					</div>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<span class="cursor-pointer" on:click={() => (showPubkey = true)}>
-						{#if showPubkey}
-							<a target="_self" href={"https://nosta.me/" + npub}>{npub}</a>
-						{:else}
-							Click to show npub
-						{/if}
-					</span>
 				</div>
 			</div>
 			<div class="mt-2 flex flex-wrap gap-2">
@@ -138,10 +128,30 @@
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
-			<div
-				class="prose prose-lg dark:prose-invert prose-img:rounded-xl"
-			>
-				{@html postContent}
+			<div class="flex gap-24">
+				<div class="">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div
+						class="cursor-pointer"
+						on:mousedown={() => copyIconScale.set(0.8)}
+						on:mouseup={() => copyIconScale.set(1)}
+						on:click={() => navigator.clipboard.writeText(url)}
+					>
+						<Fa icon={faLink} scale={$copyIconScale} />
+					</div>
+					<a
+						aria-label="Share to Twitter"
+						class="ml-2"
+						href="https://twitter.com/intent/tweet?url={url}"
+						on:mousedown={() => tweetIconScale.set(0.8)}
+						on:mouseup={() => tweetIconScale.set(1)}
+					>
+						<Fa icon={faTwitter} scale={$tweetIconScale} />
+					</a>
+				</div>
+				<div class="prose prose-lg font-body dark:prose-invert prose-img:rounded-xl">
+					{@html postContent}
+				</div>
 			</div>
 		</div>
 	</article>

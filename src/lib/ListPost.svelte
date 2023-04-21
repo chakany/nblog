@@ -25,7 +25,7 @@
 	{/if}
 	| {readingTime(post.content)} min read
 </div>
-<div class="flex">
+<div class="flex font-display">
 	<div class="flex flex-col">
 		<a
 			class="flex cursor-pointer flex-col"

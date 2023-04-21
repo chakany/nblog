@@ -1,6 +1,8 @@
 <script lang="ts">
 	import "../app.css";
 	import "@fontsource/source-sans-pro";
+	import "@fontsource/roboto-mono";
+	import "@fontsource/noto-serif-lao"
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
 	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
 	import Fa from "svelte-fa";
@@ -28,9 +30,8 @@
 
 <header>
 	<nav class="mx-10 my-6 flex md:mx-20">
-		<a href="/" target="_self" class="my-auto flex">
-			<img class="my-auto w-14 rounded" src={PUBLIC_PICTURE} alt="Header" />
-			<span class="my-auto ml-2">{PUBLIC_NAME}</span>
+		<a href="/" target="_self" class="my-auto flex font-bold">
+			{PUBLIC_NAME}
 		</a>
 		<div class="my-auto ml-10 flex">
 			<ul>
@@ -42,7 +43,6 @@
 		</a>
 	</nav>
 </header>
-<hr />
 
 <main class="container px-6 py-8 md:px-24 lg:px-52">
 	<slot />
@@ -63,8 +63,7 @@
 
 <style lang="postcss">
 	:global(html, body) {
-		font-family: "Source Sans Pro", sans-serif;
-		@apply subpixel-antialiased dark:bg-black dark:text-white;
+		@apply font-body subpixel-antialiased dark:bg-black dark:text-white;
 	}
 
 	:global(.subtext) {
