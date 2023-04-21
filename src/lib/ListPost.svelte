@@ -14,6 +14,9 @@
 
 <div class="flex font-display">
 	<div class="flex flex-col my-auto">
+		<div class="mt-2">
+			<Tags tags={post.tags.filter((v) => v[0] === "t")} />
+		</div>
 		<a
 				class="flex cursor-pointer flex-col"
 				href="/posts/{getTagValues(post.tags, 'd')[0]}"
@@ -25,9 +28,6 @@
 			</div>
 			<p class="muted-bright">{summary ? summary[0] : "Summary"}</p>
 		</a>
-		<div class="mt-2 gap-2">
-			<Tags tags={post.tags.filter((v) => v[0] === "t")} />
-		</div>
 	</div>
 	{#if image}
 		<img

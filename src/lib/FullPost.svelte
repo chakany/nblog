@@ -88,6 +88,9 @@
 <div class="flex flex-col">
 	<article>
 		<div class="sm:px-14 md:px-4 xl:px-20 2xl:px-52 font-display">
+			<div class="mt-2">
+				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
+			</div>
 			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
@@ -112,9 +115,6 @@
 						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()} <span class="muted-dark">/</span> {readingTime(post.content)} min read
 					</div>
 				</div>
-			</div>
-			<div class="mt-2 flex flex-wrap gap-2">
-				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 			</div>
 		</div>
 		<div class="flex flex-col items-center">
