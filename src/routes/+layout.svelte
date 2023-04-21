@@ -64,7 +64,7 @@
 <style lang="postcss">
 	:global(html, body) {
 		font-family: "Source Sans Pro", sans-serif;
-		@apply dark:bg-black dark:text-white;
+		@apply subpixel-antialiased dark:bg-black dark:text-white;
 	}
 
 	:global(.subtext) {
