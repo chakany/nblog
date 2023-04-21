@@ -4,8 +4,6 @@
 	import "@fontsource/roboto-mono";
 	import "@fontsource/noto-serif-lao"
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
-	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
-	import Fa from "svelte-fa";
 	import { onMount } from "svelte";
 	import { version } from "$app/environment";
 
@@ -29,18 +27,17 @@
 </svelte:head>
 
 <header>
-	<nav class="mx-10 my-6 flex md:mx-20">
-		<a href="/" target="_self" class="my-auto flex font-bold">
+	<nav class="font-display px-10 py-6 flex md:px-20">
+		<a href="/" target="_self">
 			{PUBLIC_NAME}
 		</a>
-		<div class="my-auto ml-10 flex">
-			<ul>
-				<li><a class="underline" href="/posts" target="_self">Posts</a></li>
+		<div class="uppercase ml-auto">
+			<ul class="flex sm:gap-2 lg:gap-4">
+				<li><a class="px-3 py-2" href="/" target="_self">Home</a></li>
+				<li><a class="px-3 py-2" href="/posts" target="_self">Posts</a></li>
+				<li><a class="px-3 py-2" href="/atom" target="_self">Feed</a></li>
 			</ul>
 		</div>
-		<a href="/atom" target="_self" class="my-auto ml-auto flex">
-			<Fa icon={faSquareRss} scale={2} />
-		</a>
 	</nav>
 </header>
 
@@ -49,7 +46,7 @@
 </main>
 
 <hr />
-<footer class="mx-6 my-6 flex text-xs">
+<footer class="flex text-xs font-display mx-6 my-6">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
 	</div>
