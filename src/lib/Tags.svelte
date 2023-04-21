@@ -2,7 +2,7 @@
 	export let tags: string[] = [];
 </script>
 
-<div class="flex gap-2">
+<div class="flex gap-2 font-mono">
 	{#each tags as tag, i}
 		<a
 				href="/tags/{tag[1]}"
