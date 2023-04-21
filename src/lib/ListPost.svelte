@@ -1,6 +1,4 @@
 <script lang="ts">
-	// @ts-expect-error weird error
-	import { formatDistance } from "date-fns";
 	import { type Event } from "nostr-tools";
 	import { getTagValues, readingTime } from "$lib/util";
 	export let post: Event;
