@@ -93,41 +93,6 @@
 <div class="flex flex-col">
 	<article>
 		<div class="px-20">
-			<div class="subtext md:text-md flex text-sm lg:text-lg">
-				<div>
-					Published {formatDistance(
-						new Date(published_at ? Number(published_at[0]) * 1000 : 0),
-						new Date(),
-						{ addSuffix: true }
-					)}
-					{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
-						| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
-							addSuffix: true,
-						})}
-					{/if}
-					| {readingTime(post.content)} min read
-				</div>
-				<div class="my-auto ml-auto flex">
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div
-						class="cursor-pointer"
-						on:mousedown={() => copyIconScale.set(0.8)}
-						on:mouseup={() => copyIconScale.set(1)}
-						on:click={() => navigator.clipboard.writeText(url)}
-					>
-						<Fa icon={faLink} scale={$copyIconScale} />
-					</div>
-					<a
-						aria-label="Share to Twitter"
-						class="ml-2"
-						href="https://twitter.com/intent/tweet?url={url}"
-						on:mousedown={() => tweetIconScale.set(0.8)}
-						on:mouseup={() => tweetIconScale.set(1)}
-					>
-						<Fa icon={faTwitter} scale={$tweetIconScale} />
-					</a>
-				</div>
-			</div>
 			<h1 class="text-2xl font-extrabold sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
@@ -149,24 +114,9 @@
 								@{author.name}
 							{/if}
 						</div>
-						{#if author && author.nip05}
-							<div class="flex gap-1.5">
-								{author.nip05}
-								<span class="my-auto">
-									{#await nip05.queryProfile(author.nip05)}
-										<Fa icon={faEllipsis} />
-									{:then profile}
-										{#if profile.pubkey === post.pubkey}
-											<Fa icon={faCheck} />
-										{:else}
-											<Fa icon={faX} />
-										{/if}
-									{:catch error}
-										<Fa icon={faX} />
-									{/await}
-								</span>
-							</div>
-						{/if}
+					</div>
+					<div>
+						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString(undefined)} <span class="subtext">/</span> {readingTime(post.content)} min read
 					</div>
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<span class="cursor-pointer" on:click={() => (showPubkey = true)}>
