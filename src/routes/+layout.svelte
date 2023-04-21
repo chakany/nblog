@@ -60,10 +60,14 @@
 
 <style lang="postcss">
 	:global(html, body) {
-		@apply font-body subpixel-antialiased dark:bg-black dark:text-white;
+		@apply font-body subpixel-antialiased dark:bg-[#242731] dark:text-white;
 	}
 
-	:global(.subtext) {
-		@apply text-slate-500 dark:text-gray-300;
+	:global(.muted-bright) {
+		@apply text-slate-500 dark:text-slate-300;
+	}
+
+	:global(.muted-dark) {
+		@apply text-slate-300 dark:text-slate-500;
 	}
 </style>

@@ -7,12 +7,12 @@
 		<a
 				href="/tags/{tag[1]}"
 				target="_self"
-				class="text-red-500"
+				class="text-orange-600"
 		>
 			#{tag[1]}
 		</a>
 		{#if tags[i + 1]}
-			<span class="subtext">/</span>
+			<span class="muted-dark">/</span>
 		{/if}
 	{/each}
 </div>

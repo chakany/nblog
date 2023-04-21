@@ -1,13 +1,11 @@
 <script lang="ts">
-	// @ts-expect-error weird error, don't know why it's there
-	import { formatDistance } from "date-fns";
-	import { nip19, nip05, type Event } from "nostr-tools";
+	import { type Event } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tags from "$lib/Tags.svelte";
 	import Fa from "svelte-fa";
 	import { spring } from "svelte/motion";
-	import { faLink, faCheck, faX, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+	import { faLink } from "@fortawesome/free-solid-svg-icons";
 	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
 	import Reaction from "$lib/Reaction.svelte";
@@ -85,18 +83,15 @@
 
 	const converter = new showdown.Converter();
 	const postContent = converter.makeHtml(post.content);
-
-	let showPubkey = false;
-	const npub = nip19.npubEncode(post.pubkey);
 </script>
 
 <div class="flex flex-col">
 	<article>
-		<div class="px-20 font-display">
+		<div class="sm:px-14 md:px-4 xl:px-20 2xl:px-52 font-display">
 			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
-			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
+			<p class="muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
 				<img
 					class="my-auto h-14 w-14 rounded-full"
@@ -106,7 +101,7 @@
 					alt="Profile"
 				/>
 				<div class="my-auto flex flex-col pl-3">
-					<div class="flex gap-1.5 font-mono">
+					<div class="flex gap-1.5 font-mono text-[#FF4A00]">
 						{#if author && author.display_name}
 							{author.display_name}
 						{:else if author && author.name}
@@ -114,7 +109,7 @@
 						{/if}
 					</div>
 					<div>
-						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString(undefined)} <span class="subtext">/</span> {readingTime(post.content)} min read
+						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()} <span class="muted-dark">/</span> {readingTime(post.content)} min read
 					</div>
 				</div>
 			</div>
@@ -124,7 +119,7 @@
 		</div>
 		<div class="flex flex-col items-center">
 			<img
-				class="object-fit my-5 max-w-sm rounded sm:max-w-md md:max-w-lg xl:max-w-2xl"
+				class="object-fit my-5 max-w-sm rounded sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
