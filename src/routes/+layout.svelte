@@ -7,9 +7,6 @@
 	import { onMount } from "svelte";
 	import { version } from "$app/environment";
 
-	export const ssr = true;
-	export const csr = true;
-
 	let url: string;
 	onMount(() => {
 		url = window.location.href;
