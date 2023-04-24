@@ -20,7 +20,7 @@
 			href="/posts/{getTagValues(post.tags, 'd')[0]}"
 			target="_self"
 		>
-			<h2 class="text-xl md:text-2xl xl:text-3xl font-black">{title ? title[0] : "Title"}</h2>
+			<h2 class="text-xl font-black md:text-2xl xl:text-3xl">{title ? title[0] : "Title"}</h2>
 			<div class="text-xs lg:text-sm">
 				{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()}
 				<span class="muted-dark">/</span>
