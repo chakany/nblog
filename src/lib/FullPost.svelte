@@ -88,8 +88,28 @@
 <div class="flex flex-col">
 	<article>
 		<div class="sm:px-14 md:px-4 xl:px-20 2xl:px-52 font-display">
-			<div class="mt-2">
+			<div class="flex mt-2">
 				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
+				<div class="flex ml-auto">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div
+							class="cursor-pointer"
+							on:mousedown={() => copyIconScale.set(0.8)}
+							on:mouseup={() => copyIconScale.set(1)}
+							on:click={() => navigator.clipboard.writeText(url)}
+					>
+						<Fa icon={faLink} scale={$copyIconScale} />
+					</div>
+					<a
+							aria-label="Share to Twitter"
+							class="ml-2"
+							href="https://twitter.com/intent/tweet?url={url}"
+							on:mousedown={() => tweetIconScale.set(0.8)}
+							on:mouseup={() => tweetIconScale.set(1)}
+					>
+						<Fa icon={faTwitter} scale={$tweetIconScale} />
+					</a>
+				</div>
 			</div>
 			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
@@ -124,26 +144,6 @@
 				alt="Post"
 			/>
 			<div class="flex gap-24">
-				<div class="">
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div
-						class="cursor-pointer"
-						on:mousedown={() => copyIconScale.set(0.8)}
-						on:mouseup={() => copyIconScale.set(1)}
-						on:click={() => navigator.clipboard.writeText(url)}
-					>
-						<Fa icon={faLink} scale={$copyIconScale} />
-					</div>
-					<a
-						aria-label="Share to Twitter"
-						class="ml-2"
-						href="https://twitter.com/intent/tweet?url={url}"
-						on:mousedown={() => tweetIconScale.set(0.8)}
-						on:mouseup={() => tweetIconScale.set(1)}
-					>
-						<Fa icon={faTwitter} scale={$tweetIconScale} />
-					</a>
-				</div>
 				<div class="prose prose-lg font-body dark:prose-invert prose-img:rounded-xl">
 					{@html postContent}
 				</div>
