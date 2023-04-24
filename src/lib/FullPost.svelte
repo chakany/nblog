@@ -90,7 +90,7 @@
 		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
 			<div class="mt-2 flex">
 				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
-				<div class="ml-auto flex">
+				<div class="ml-auto flex muted-bright">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class="cursor-pointer"
