@@ -28,7 +28,7 @@
 
 <header>
 	<nav class="flex px-10 py-6 font-display md:px-20">
-		<a href="/" target="_self">
+		<a class="font-black" href="/" target="_self">
 			{PUBLIC_NAME}
 		</a>
 		<div class="ml-auto uppercase">
