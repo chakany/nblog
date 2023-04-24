@@ -10,4 +10,12 @@
 	.text-muted-dark {
 		@apply text-slate-300 dark:text-slate-500;
 	}
+
+	.border-muted-bright {
+		@apply border-slate-500 dark:border-slate-300;
+	}
+
+	.border-muted-dark {
+		@apply border-slate-300 dark:border-slate-500;
+	}
 }

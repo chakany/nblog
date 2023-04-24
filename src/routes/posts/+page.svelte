@@ -17,7 +17,7 @@
 			<ListPost {post} />
 		</div>
 		{#if data.posts[i + 1]}
-			<hr />
+			<hr class="border-muted-dark" />
 		{/if}
 	{/each}
 {:else}

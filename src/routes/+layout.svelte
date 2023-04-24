@@ -42,7 +42,7 @@
 	<slot />
 </main>
 
-<hr />
+<hr class="border-muted-dark" />
 <footer class="mx-6 my-6 flex font-display text-xs">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
