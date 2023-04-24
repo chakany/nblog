@@ -89,9 +89,7 @@
 	<article>
 		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
 			<div class="mt-2 flex">
-				<div class="text-xs md:text-sm xl:text-lg">
-					<Tags tags={post.tags.filter((v) => v[0] === "t")} />
-				</div>
+				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 				<div class="ml-auto flex">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div

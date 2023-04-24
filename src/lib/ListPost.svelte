@@ -12,7 +12,7 @@
 
 <div class="flex font-display">
 	<div class="my-auto flex flex-col">
-		<div class="mt-2 text-xs lg:text-sm">
+		<div class="mt-2">
 			<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 		</div>
 		<a
