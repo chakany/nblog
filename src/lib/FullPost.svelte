@@ -90,7 +90,7 @@
 		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
 			<div class="mt-2 flex">
 				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
-				<div class="ml-auto flex muted-bright">
+				<div class="ml-auto flex text-muted-bright">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class="cursor-pointer"
@@ -114,7 +114,7 @@
 			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
-			<p class="muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
+			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
 				<img
 					class="my-auto h-14 w-14 rounded-full"
@@ -134,7 +134,7 @@
 					<div>
 						{new Date(
 							published_at ? Number(published_at[0]) * 1000 : 0
-						).toLocaleDateString()} <span class="muted-dark">/</span>
+						).toLocaleDateString()} <span class="text-muted-dark">/</span>
 						{readingTime(post.content)} min read
 					</div>
 				</div>

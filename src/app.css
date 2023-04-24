@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer utilities {
-	.muted-bright {
+	.text-muted-bright {
 		@apply text-slate-500 dark:text-slate-300;
 	}
 
-	.muted-dark {
+	.text-muted-dark {
 		@apply text-slate-300 dark:text-slate-500;
 	}
 }

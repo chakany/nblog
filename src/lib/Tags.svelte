@@ -8,7 +8,7 @@
 			#{tag[1]}
 		</a>
 		{#if tags[i + 1]}
-			<span class="muted-dark">/</span>
+			<span class="text-muted-dark">/</span>
 		{/if}
 	{/each}
 </div>

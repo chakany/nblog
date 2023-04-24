@@ -23,10 +23,10 @@
 			<h2 class="text-xl font-black md:text-2xl xl:text-3xl">{title ? title[0] : "Title"}</h2>
 			<div class="text-xs lg:text-sm">
 				{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()}
-				<span class="muted-dark">/</span>
+				<span class="text-muted-dark">/</span>
 				{readingTime(post.content)} min read
 			</div>
-			<p class="muted-bright xl:text-xl">{summary ? summary[0] : "Summary"}</p>
+			<p class="text-muted-bright xl:text-xl">{summary ? summary[0] : "Summary"}</p>
 		</a>
 	</div>
 	{#if image}
