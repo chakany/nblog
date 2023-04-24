@@ -148,10 +148,8 @@
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
-			<div class="flex gap-24">
-				<div class="prose prose-lg font-body dark:prose-invert prose-img:rounded-xl">
-					{@html postContent}
-				</div>
+			<div class="prose prose-lg font-body dark:prose-invert prose-img:rounded-xl">
+				{@html postContent}
 			</div>
 		</div>
 	</article>
