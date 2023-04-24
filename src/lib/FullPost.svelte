@@ -156,22 +156,22 @@
 			<div class="mr-4" on:click={() => react("+")}>
 				<Reaction
 					label="👍"
-					reactions={reactions.filter(
+					count={reactions.filter(
 						(v) =>
 							v.content === "👍" ||
 							v.content === "+" ||
 							v.content === "❤️" ||
 							v.content === "🤙"
-					)}
+					).length}
 				/>
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => react("-")}>
 				<Reaction
 					label="👎"
-					reactions={reactions.filter(
+					count={reactions.filter(
 						(v) => v.content === "👎" || v.content === "-" || v.content === "💔"
-					)}
+					).length}
 				/>
 			</div>
 		</div>
