@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .muted-bright {
+        @apply text-slate-500 dark:text-slate-300;
+    }
+
+    .muted-dark {
+        @apply text-slate-300 dark:text-slate-500;
+    }
+}

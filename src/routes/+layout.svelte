@@ -62,12 +62,4 @@
 	:global(html, body) {
 		@apply font-body subpixel-antialiased dark:bg-[#242731] dark:text-white;
 	}
-
-	:global(.muted-bright) {
-		@apply text-slate-500 dark:text-slate-300;
-	}
-
-	:global(.muted-dark) {
-		@apply text-slate-300 dark:text-slate-500;
-	}
 </style>
