@@ -87,25 +87,25 @@
 
 <div class="flex flex-col">
 	<article>
-		<div class="sm:px-14 md:px-4 xl:px-20 2xl:px-52 font-display">
-			<div class="flex mt-2">
+		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
+			<div class="mt-2 flex">
 				<Tags tags={post.tags.filter((v) => v[0] === "t")} />
-				<div class="flex ml-auto">
+				<div class="ml-auto flex">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
-							class="cursor-pointer"
-							on:mousedown={() => copyIconScale.set(0.8)}
-							on:mouseup={() => copyIconScale.set(1)}
-							on:click={() => navigator.clipboard.writeText(url)}
+						class="cursor-pointer"
+						on:mousedown={() => copyIconScale.set(0.8)}
+						on:mouseup={() => copyIconScale.set(1)}
+						on:click={() => navigator.clipboard.writeText(url)}
 					>
 						<Fa icon={faLink} scale={$copyIconScale} />
 					</div>
 					<a
-							aria-label="Share to Twitter"
-							class="ml-2"
-							href="https://twitter.com/intent/tweet?url={url}"
-							on:mousedown={() => tweetIconScale.set(0.8)}
-							on:mouseup={() => tweetIconScale.set(1)}
+						aria-label="Share to Twitter"
+						class="ml-2"
+						href="https://twitter.com/intent/tweet?url={url}"
+						on:mousedown={() => tweetIconScale.set(0.8)}
+						on:mouseup={() => tweetIconScale.set(1)}
 					>
 						<Fa icon={faTwitter} scale={$tweetIconScale} />
 					</a>
@@ -132,7 +132,10 @@
 						{/if}
 					</div>
 					<div>
-						{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()} <span class="muted-dark">/</span> {readingTime(post.content)} min read
+						{new Date(
+							published_at ? Number(published_at[0]) * 1000 : 0
+						).toLocaleDateString()} <span class="muted-dark">/</span>
+						{readingTime(post.content)} min read
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 	import "../app.css";
 	import "@fontsource/source-sans-pro";
 	import "@fontsource/roboto-mono";
-	import "@fontsource/noto-serif-lao"
+	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
 	import { onMount } from "svelte";
 	import { version } from "$app/environment";
@@ -27,11 +27,11 @@
 </svelte:head>
 
 <header>
-	<nav class="font-display px-10 py-6 flex md:px-20">
+	<nav class="flex px-10 py-6 font-display md:px-20">
 		<a href="/" target="_self">
 			{PUBLIC_NAME}
 		</a>
-		<div class="uppercase ml-auto">
+		<div class="ml-auto uppercase">
 			<ul class="flex sm:gap-2 lg:gap-4">
 				<li><a class="px-3 py-2" href="/" target="_self">Home</a></li>
 				<li><a class="px-3 py-2" href="/posts" target="_self">Posts</a></li>
@@ -46,7 +46,7 @@
 </main>
 
 <hr />
-<footer class="flex text-xs font-display mx-6 my-6">
+<footer class="mx-6 my-6 flex font-display text-xs">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
 	</div>
