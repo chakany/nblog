@@ -19,3 +19,9 @@
 		@apply border-slate-300 dark:border-slate-500;
 	}
 }
+
+@layer utilities {
+	.placeholder {
+		@apply animate-pulse bg-gray-200 dark:bg-gray-500
+	}
+}

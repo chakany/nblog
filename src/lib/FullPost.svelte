@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Event } from "nostr-tools";
+	import { type Event, nip19 } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tags from "$lib/Tags.svelte";
@@ -116,19 +116,31 @@
 			</h1>
 			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
-				<img
-					class="my-auto h-14 w-14 rounded-full"
-					src={author && author.picture
-						? author.picture
-						: `https://robohash.org/${post.pubkey}?sets=1`}
-					alt="Profile"
-				/>
+				{#if author && author.picture}
+					<img
+							class="my-auto h-14 w-14 rounded-full placeholder"
+							src={author.picture}
+							alt="Profile"
+					/>
+				{:else if author}
+					<img
+							class="my-auto h-14 w-14 rounded-full"
+							src={`https://robohash.org/${post.pubkey}?sets=1`}
+							alt="Profile"
+					/>
+				{:else}
+					<div class="my-auto h-14 w-14 rounded-full placeholder"></div>
+				{/if}
 				<div class="my-auto flex flex-col pl-3">
-					<div class="flex gap-1.5 font-mono text-[#FF4A00]">
+					<div class="gap-1.5 font-mono text-[#FF4A00]">
 						{#if author && author.display_name}
 							{author.display_name}
 						{:else if author && author.name}
 							@{author.name}
+						{:else if author}
+							{nip19.npubEncode(post.pubkey)}
+						{:else}
+							<div class="h-5 rounded placeholder"></div>
 						{/if}
 					</div>
 					<div>
