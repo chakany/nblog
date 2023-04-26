@@ -9,7 +9,7 @@ See a running demo at https://hello-ndk.vercel.app
 
 Simply click this bright, blue button:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjacany%2Fnblog&env=PUBLIC_PUBKEYS,PUBLIC_RELAYS,PUBLIC_NAME,PUBLIC_PICTURE,PUBLIC_REACTIONS&envDescription=nblog%20configuration&envLink=https%3A%2F%2Fgithub.com%2Fjacany%2Fnblog%23configuration&project-name=nblog&repository-name=my-nblog)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jacany/nblog/tree/master&env=PUBLIC_PUBKEYS,PUBLIC_RELAYS,PUBLIC_NAME,PUBLIC_PICTURE,PUBLIC_REACTIONS&envDescription=nblog%20configuration&envLink=https://github.com/jacany/nblog%23configuration&project-name=nblog&repository-name=my-nblog)
 
 ### Locally
 
@@ -17,6 +17,7 @@ Ensure you have Node.js installed on your computer.
 
 1. [Fork this repository](https://github.com/jacany/nblog/fork)
 2. Git clone you new fork to your server
+3. Inside the project root, run `git checkout master` to switch to the master branch for the most stable version
 3. Add a `.env` file to the project root. See the Configuration section
 4. Run `yarn` to install node packages
 5. Run `yarn build` to build the production server
