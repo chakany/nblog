@@ -113,7 +113,7 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl font-black sm:text-3xl md:text-4xl">
+			<h1 class="text-3xl md:text-4xl font-black ">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
@@ -160,7 +160,7 @@
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
-			<div class="prose prose-lg font-body dark:prose-invert prose-img:rounded-xl">
+			<div class="prose prose-gray prose-lg font-body dark:prose-invert prose-img:rounded-xl prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:bg-gray-200 prose-code:dark:bg-slate-900 prose-code:rounded">
 				{@html postContent}
 			</div>
 		</div>
