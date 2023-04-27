@@ -136,7 +136,7 @@
 					<div class="my-auto h-14 w-14 rounded-full placeholder"></div>
 				{/if}
 				<div class="my-auto flex flex-col pl-3">
-					<div class="gap-1.5 font-mono text-[#FF4A00]">
+					<div class="gap-1.5 font-mono">
 						{#if author && author.display_name}
 							{author.display_name}
 						{:else if author && author.name}
