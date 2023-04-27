@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let tags: string[] | string[][] = [];
 	const isNostr = (Array.isArray(tags[0]) && tags[0][0] === `t`);
-	console.log(isNostr)
 </script>
 
 <div class="flex flex-wrap gap-2 font-mono">
