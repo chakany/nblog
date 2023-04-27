@@ -1,10 +1,8 @@
 <script lang="ts">
-	// @ts-expect-error weird error
-	import { formatDistance } from "date-fns";
 	import { type Event } from "nostr-tools";
 	import { getTagValues, readingTime } from "$lib/util";
 	export let post: Event;
-	import Tag from "$lib/Tag.svelte";
+	import Tags from "$lib/Tags.svelte";
 
 	const published_at = getTagValues(post.tags, "published_at");
 	const title = getTagValues(post.tags, "title");
@@ -12,38 +10,28 @@
 	const image = getTagValues(post.tags, "image");
 </script>
 
-<div class="md:text-md text-xs">
-	Published {formatDistance(
-		new Date(published_at ? Number(published_at[0]) * 1000 : 0),
-		new Date(),
-		{ addSuffix: true }
-	)}
-	{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
-		| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
-			addSuffix: true,
-		})}
-	{/if}
-	| {readingTime(post.content)} min read
-</div>
-<div class="flex">
-	<div class="flex flex-col">
+<div class="flex font-display">
+	<div class="my-auto flex flex-col">
+		<div class="mt-2 text-xs">
+			<Tags tags={post.tags.filter((v) => v[0] === "t")} />
+		</div>
 		<a
 			class="flex cursor-pointer flex-col"
 			href="/posts/{getTagValues(post.tags, 'd')[0]}"
 			target="_self"
 		>
-			<h2 class="text-xl font-bold xl:text-3xl">{title ? title[0] : "Title"}</h2>
-			<p class="subtext">{summary ? summary[0] : "Summary"}</p>
+			<h2 class="text-xl font-black md:text-2xl xl:text-3xl">{title ? title[0] : "Title"}</h2>
+			<div class="text-xs lg:text-sm">
+				{new Date(published_at ? Number(published_at[0]) * 1000 : 0).toLocaleDateString()}
+				<span class="text-muted-dark">/</span>
+				{readingTime(post.content)} min read
+			</div>
+			<p class="text-muted-bright xl:text-xl">{summary ? summary[0] : "Summary"}</p>
 		</a>
-		<div class="mt-2 flex flex-wrap gap-2">
-			{#each post.tags.filter((v) => v[0] === "t") as tag}
-				<Tag name={tag[1]} />
-			{/each}
-		</div>
 	</div>
 	{#if image}
 		<img
-			class="ml-auto hidden h-20 w-20 rounded object-cover sm:inline"
+			class="my-auto ml-auto hidden h-20 w-20 rounded object-cover sm:inline"
 			src={image[0]}
 			alt="Banner"
 		/>

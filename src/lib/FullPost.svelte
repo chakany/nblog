@@ -1,13 +1,11 @@
 <script lang="ts">
-	// @ts-expect-error weird error, don't know why it's there
-	import { formatDistance } from "date-fns";
-	import { nip19, nip05, type Event } from "nostr-tools";
+	import { type Event, nip19 } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
-	import Tag from "$lib/Tag.svelte";
+	import Tags from "$lib/Tags.svelte";
 	import Fa from "svelte-fa";
 	import { spring } from "svelte/motion";
-	import { faLink, faCheck, faX, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+	import { faLink } from "@fortawesome/free-solid-svg-icons";
 	import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 	import { onMount } from "svelte";
 	import Reaction from "$lib/Reaction.svelte";
@@ -85,33 +83,21 @@
 
 	const converter = new showdown.Converter();
 	const postContent = converter.makeHtml(post.content);
-
-	let showPubkey = false;
-	const npub = nip19.npubEncode(post.pubkey);
 </script>
 
 <div class="flex flex-col">
 	<article>
-		<div>
-			<div class="subtext md:text-md flex text-sm lg:text-lg">
-				<div>
-					Published {formatDistance(
-						new Date(published_at ? Number(published_at[0]) * 1000 : 0),
-						new Date(),
-						{ addSuffix: true }
-					)}
-					{#if post.created_at !== (published_at ? Number(published_at[0]) : 0)}
-						| Edited {formatDistance(new Date(post.created_at * 1000), new Date(), {
-							addSuffix: true,
-						})}
-					{/if}
-					| {readingTime(post.content)} min read
+		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
+			<div class="mt-2 flex">
+				<div class="text-xs">
+					<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 				</div>
-				<div class="my-auto ml-auto flex">
+				<div class="text-muted-bright ml-auto flex">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
-						class="cursor-pointer"
+						class="transition-500 cursor-pointer transition-colors ease-linear hover:text-black hover:dark:text-white"
 						on:mousedown={() => copyIconScale.set(0.8)}
+						on:mouseleave={() => copyIconScale.set(1)}
 						on:mouseup={() => copyIconScale.set(1)}
 						on:click={() => navigator.clipboard.writeText(url)}
 					>
@@ -119,79 +105,65 @@
 					</div>
 					<a
 						aria-label="Share to Twitter"
-						class="ml-2"
+						class="transition-500 ml-2 transition-colors ease-linear hover:text-black hover:dark:text-white"
 						href="https://twitter.com/intent/tweet?url={url}"
 						on:mousedown={() => tweetIconScale.set(0.8)}
+						on:mouseleave={() => tweetIconScale.set(1)}
 						on:mouseup={() => tweetIconScale.set(1)}
 					>
 						<Fa icon={faTwitter} scale={$tweetIconScale} />
 					</a>
 				</div>
 			</div>
-			<h1 class="text-2xl font-extrabold underline sm:text-3xl md:text-4xl">
+			<h1 class="text-3xl font-black md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
-			<p class="subtext pt-1">{summary ? summary[0] : "Summary"}</p>
+			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
-				<img
-					class="my-auto h-14 w-14 rounded"
-					src={author && author.picture
-						? author.picture
-						: `https://robohash.org/${post.pubkey}?sets=1`}
-					alt="Profile"
-				/>
+				{#if author && author.picture}
+					<img
+						class="placeholder my-auto h-14 w-14 rounded-full"
+						src={author.picture}
+						alt="Profile"
+					/>
+				{:else if author}
+					<img
+						class="my-auto h-14 w-14 rounded-full"
+						src={`https://robohash.org/${post.pubkey}?sets=1`}
+						alt="Profile"
+					/>
+				{:else}
+					<div class="placeholder my-auto h-14 w-14 rounded-full" />
+				{/if}
 				<div class="my-auto flex flex-col pl-3">
-					<div class="flex gap-1.5">
-						<div>
-							{#if author && author.display_name}
-								{author.display_name}
-							{:else if author && author.name}
-								@{author.name}
-							{/if}
-						</div>
-						{#if author && author.nip05}
-							<div class="flex gap-1.5">
-								{author.nip05}
-								<span class="my-auto">
-									{#await nip05.queryProfile(author.nip05)}
-										<Fa icon={faEllipsis} />
-									{:then profile}
-										{#if profile.pubkey === post.pubkey}
-											<Fa icon={faCheck} />
-										{:else}
-											<Fa icon={faX} />
-										{/if}
-									{:catch error}
-										<Fa icon={faX} />
-									{/await}
-								</span>
-							</div>
+					<div class="gap-1.5 font-mono">
+						{#if author && author.display_name}
+							{author.display_name}
+						{:else if author && author.name}
+							@{author.name}
+						{:else if author}
+							{nip19.npubEncode(post.pubkey)}
+						{:else}
+							<div class="placeholder h-5 rounded" />
 						{/if}
 					</div>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<span class="cursor-pointer" on:click={() => (showPubkey = true)}>
-						{#if showPubkey}
-							<a target="_self" href={"https://nosta.me/" + npub}>{npub}</a>
-						{:else}
-							Click to show npub
-						{/if}
-					</span>
+					<div>
+						{new Date(
+							published_at ? Number(published_at[0]) * 1000 : 0
+						).toLocaleDateString()} <span class="text-muted-dark">/</span>
+						{readingTime(post.content)} min read
+					</div>
 				</div>
-			</div>
-			<div class="mt-2 flex flex-wrap gap-2">
-				{#each post.tags.filter((v) => v[0] === "t") as tag}
-					<Tag name={tag[1]} />
-				{/each}
 			</div>
 		</div>
 		<div class="flex flex-col items-center">
 			<img
-				class="object-fit my-5 max-w-sm rounded sm:max-w-md md:max-w-lg xl:max-w-2xl"
+				class="object-fit my-5 max-w-sm rounded sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
 			<div
-				class="prose prose-lg dark:prose-invert prose-headings:underline prose-img:rounded-xl"
+				class="prose prose-lg prose-gray font-body dark:prose-invert prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:rounded prose-code:bg-gray-200 prose-img:rounded-xl prose-code:dark:bg-slate-900"
 			>
 				{@html postContent}
 			</div>
@@ -203,22 +175,22 @@
 			<div class="mr-4" on:click={() => react("+")}>
 				<Reaction
 					label="👍"
-					reactions={reactions.filter(
+					count={reactions.filter(
 						(v) =>
 							v.content === "👍" ||
 							v.content === "+" ||
 							v.content === "❤️" ||
 							v.content === "🤙"
-					)}
+					).length}
 				/>
 			</div>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div on:click={() => react("-")}>
 				<Reaction
 					label="👎"
-					reactions={reactions.filter(
+					count={reactions.filter(
 						(v) => v.content === "👎" || v.content === "-" || v.content === "💔"
-					)}
+					).length}
 				/>
 			</div>
 		</div>

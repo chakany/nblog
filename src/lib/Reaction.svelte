@@ -1,12 +1,9 @@
 <script lang="ts">
-	import { type Event } from "nostr-tools";
 	export let label = "+";
-	export let reactions: Event[] = [];
+	export let count = 0;
 </script>
 
-<span
-	class="flex cursor-pointer rounded border border-solid border-black px-4 py-1 dark:border-white"
->
-	<span class="mr-2">{reactions.length}</span>
+<span class="flex cursor-pointer px-1 py-1 font-display">
 	<span>{label}</span>
+	<span class="pl-4">{count}</span>
 </span>

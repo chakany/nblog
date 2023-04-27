@@ -1,14 +1,11 @@
 <script lang="ts">
 	import "../app.css";
+	import "@fontsource/source-sans-pro";
+	import "@fontsource/roboto-mono";
 	import "@fontsource/noto-serif-lao";
 	import { PUBLIC_NAME, PUBLIC_PICTURE } from "$env/static/public";
-	import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
-	import Fa from "svelte-fa";
 	import { onMount } from "svelte";
 	import { version } from "$app/environment";
-
-	export const ssr = true;
-	export const csr = true;
 
 	let url: string;
 	onMount(() => {
@@ -27,29 +24,26 @@
 </svelte:head>
 
 <header>
-	<nav class="mx-10 my-6 flex md:mx-20">
-		<a href="/" target="_self" class="my-auto flex">
-			<img class="my-auto w-14 rounded" src={PUBLIC_PICTURE} alt="Header" />
-			<span class="my-auto ml-2">{PUBLIC_NAME}</span>
+	<nav class="flex px-10 py-6 font-display md:px-20">
+		<a class="font-black" href="/" target="_self">
+			{PUBLIC_NAME}
 		</a>
-		<div class="my-auto ml-10 flex">
-			<ul>
-				<li><a class="underline" href="/posts" target="_self">Posts</a></li>
+		<div class="ml-auto uppercase">
+			<ul class="flex sm:gap-2 lg:gap-4">
+				<li><a class="px-3 py-2" href="/" target="_self">Home</a></li>
+				<li><a class="px-3 py-2" href="/posts" target="_self">Posts</a></li>
+				<li><a class="px-3 py-2" href="/atom" target="_self">Feed</a></li>
 			</ul>
 		</div>
-		<a href="/atom" target="_self" class="my-auto ml-auto flex">
-			<Fa icon={faSquareRss} scale={2} />
-		</a>
 	</nav>
 </header>
-<hr />
 
 <main class="container px-6 py-8 md:px-24 lg:px-52">
 	<slot />
 </main>
 
-<hr />
-<footer class="mx-6 my-6 flex text-xs">
+<hr class="border-muted-dark" />
+<footer class="mx-6 my-6 flex font-display text-xs">
 	<div class="mr-auto">
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
 	</div>
@@ -63,11 +57,6 @@
 
 <style lang="postcss">
 	:global(html, body) {
-		font-family: "Noto Serif Lao", serif;
-		@apply dark:bg-black dark:text-white;
-	}
-
-	:global(.subtext) {
-		@apply text-slate-500 dark:text-gray-300;
+		@apply font-body subpixel-antialiased dark:bg-[#242731] dark:text-white;
 	}
 </style>

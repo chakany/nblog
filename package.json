@@ -1,6 +1,6 @@
 {
 	"name": "nblog",
-	"version": "0.3.0",
+	"version": "0.4.0-pre",
 	"private": true,
 	"author": "Jack Chakany <jack@chaker.net>",
 	"license": "MIT",
@@ -44,10 +44,11 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/noto-serif-lao": "^4.5.13",
+		"@fontsource/roboto-mono": "^4.5.10",
+		"@fontsource/source-sans-pro": "^4.5.11",
 		"@fortawesome/free-brands-svg-icons": "^6.4.0",
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@tailwindcss/typography": "^0.5.9",
-		"date-fns": "^2.29.3",
 		"nostr-tools": "^1.8.4",
 		"showdown": "^2.1.0",
 		"svelte-fa": "^3.0.3"
