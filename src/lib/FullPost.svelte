@@ -97,6 +97,7 @@
 					<div
 						class="cursor-pointer"
 						on:mousedown={() => copyIconScale.set(0.8)}
+						on:mouseleave={() => copyIconScale.set(1)}
 						on:mouseup={() => copyIconScale.set(1)}
 						on:click={() => navigator.clipboard.writeText(url)}
 					>
@@ -107,6 +108,7 @@
 						class="ml-2"
 						href="https://twitter.com/intent/tweet?url={url}"
 						on:mousedown={() => tweetIconScale.set(0.8)}
+						on:mouseleave={() => tweetIconScale.set(1)}
 						on:mouseup={() => tweetIconScale.set(1)}
 					>
 						<Fa icon={faTwitter} scale={$tweetIconScale} />
