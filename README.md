@@ -18,10 +18,10 @@ Ensure you have Node.js installed on your computer.
 1. [Fork this repository](https://github.com/jacany/nblog/fork)
 2. Git clone you new fork to your server
 3. Inside the project root, run `git checkout master` to switch to the master branch for the most stable version
-3. Add a `.env` file to the project root. See the Configuration section
-4. Run `yarn` to install node packages
-5. Run `yarn build` to build the production server
-6. Run `yarn preview` to run the sever.
+4. Add a `.env` file to the project root. See the Configuration section
+5. Run `yarn` to install node packages
+6. Run `yarn build` to build the production server
+7. Run `yarn preview` to run the sever.
 
 If you did it right, that's about it!
 
