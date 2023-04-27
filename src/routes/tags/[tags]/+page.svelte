@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ListPost from "$lib/ListPost.svelte";
-	import Tags from "$lib/Tags.svelte"
+	import Tags from "$lib/Tags.svelte";
 	import type { PageData } from "./$types";
 	import { PUBLIC_NAME } from "$env/static/public";
 
@@ -14,7 +14,7 @@
 	<meta property="og:title" content={"Tags " + tagList} />
 </svelte:head>
 
-<div class="text-3xl flex-wrap">
+<div class="flex-wrap text-3xl">
 	<Tags tags={data.tags} />
 </div>
 

@@ -92,10 +92,10 @@
 				<div class="text-xs">
 					<Tags tags={post.tags.filter((v) => v[0] === "t")} />
 				</div>
-				<div class="ml-auto flex text-muted-bright">
+				<div class="text-muted-bright ml-auto flex">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
-						class="cursor-pointer hover:text-black hover:dark:text-white transition-colors transition-500 ease-linear"
+						class="transition-500 cursor-pointer transition-colors ease-linear hover:text-black hover:dark:text-white"
 						on:mousedown={() => copyIconScale.set(0.8)}
 						on:mouseleave={() => copyIconScale.set(1)}
 						on:mouseup={() => copyIconScale.set(1)}
@@ -105,7 +105,7 @@
 					</div>
 					<a
 						aria-label="Share to Twitter"
-						class="ml-2 hover:text-black hover:dark:text-white transition-colors transition-500 ease-linear"
+						class="transition-500 ml-2 transition-colors ease-linear hover:text-black hover:dark:text-white"
 						href="https://twitter.com/intent/tweet?url={url}"
 						on:mousedown={() => tweetIconScale.set(0.8)}
 						on:mouseleave={() => tweetIconScale.set(1)}
@@ -115,25 +115,25 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-3xl md:text-4xl font-black ">
+			<h1 class="text-3xl font-black md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
 			<div class="my-3 flex">
 				{#if author && author.picture}
 					<img
-							class="my-auto h-14 w-14 rounded-full placeholder"
-							src={author.picture}
-							alt="Profile"
+						class="placeholder my-auto h-14 w-14 rounded-full"
+						src={author.picture}
+						alt="Profile"
 					/>
 				{:else if author}
 					<img
-							class="my-auto h-14 w-14 rounded-full"
-							src={`https://robohash.org/${post.pubkey}?sets=1`}
-							alt="Profile"
+						class="my-auto h-14 w-14 rounded-full"
+						src={`https://robohash.org/${post.pubkey}?sets=1`}
+						alt="Profile"
 					/>
 				{:else}
-					<div class="my-auto h-14 w-14 rounded-full placeholder"></div>
+					<div class="placeholder my-auto h-14 w-14 rounded-full" />
 				{/if}
 				<div class="my-auto flex flex-col pl-3">
 					<div class="gap-1.5 font-mono">
@@ -144,7 +144,7 @@
 						{:else if author}
 							{nip19.npubEncode(post.pubkey)}
 						{:else}
-							<div class="h-5 rounded placeholder"></div>
+							<div class="placeholder h-5 rounded" />
 						{/if}
 					</div>
 					<div>
@@ -162,7 +162,9 @@
 				src={image ? image[0] : "Image"}
 				alt="Post"
 			/>
-			<div class="prose prose-gray prose-lg font-body dark:prose-invert prose-img:rounded-xl prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:bg-gray-200 prose-code:dark:bg-slate-900 prose-code:rounded">
+			<div
+				class="prose prose-lg prose-gray font-body dark:prose-invert prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:rounded prose-code:bg-gray-200 prose-img:rounded-xl prose-code:dark:bg-slate-900"
+			>
 				{@html postContent}
 			</div>
 		</div>
