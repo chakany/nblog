@@ -95,7 +95,7 @@
 				<div class="ml-auto flex text-muted-bright">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
-						class="cursor-pointer"
+						class="cursor-pointer hover:text-black hover:dark:text-white transition-colors transition-500 ease-linear"
 						on:mousedown={() => copyIconScale.set(0.8)}
 						on:mouseleave={() => copyIconScale.set(1)}
 						on:mouseup={() => copyIconScale.set(1)}
@@ -105,7 +105,7 @@
 					</div>
 					<a
 						aria-label="Share to Twitter"
-						class="ml-2"
+						class="ml-2 hover:text-black hover:dark:text-white transition-colors transition-500 ease-linear"
 						href="https://twitter.com/intent/tweet?url={url}"
 						on:mousedown={() => tweetIconScale.set(0.8)}
 						on:mouseleave={() => tweetIconScale.set(1)}
