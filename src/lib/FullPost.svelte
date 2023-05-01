@@ -136,7 +136,7 @@
 					<div class="placeholder my-auto h-14 w-14 rounded-full" />
 				{/if}
 				<div class="my-auto flex flex-col pl-3">
-					<div class="gap-1.5 font-mono">
+					<a class="gap-1.5 font-mono text-orange-600" href="/profile/{nip19.npubEncode(post.pubkey)}">
 						{#if author && author.display_name}
 							{author.display_name}
 						{:else if author && author.name}
@@ -146,7 +146,7 @@
 						{:else}
 							<div class="placeholder h-5 rounded" />
 						{/if}
-					</div>
+					</a>
 					<div>
 						{new Date(
 							published_at ? Number(published_at[0]) * 1000 : 0
