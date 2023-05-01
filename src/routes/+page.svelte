@@ -24,7 +24,7 @@
 		</div>
 		{#if data.posts[i + 1]}
 			<div class="pb-8">
-				<hr class="border-muted-dark" />
+				<hr class="border-muted-light" />
 			</div>
 		{/if}
 	{/each}
