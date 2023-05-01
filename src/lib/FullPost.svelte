@@ -136,7 +136,10 @@
 					<div class="placeholder my-auto h-14 w-14 rounded-full" />
 				{/if}
 				<div class="my-auto flex flex-col pl-3">
-					<a class="gap-1.5 font-mono text-orange-600" href="/profile/{nip19.npubEncode(post.pubkey)}">
+					<a
+						class="gap-1.5 font-mono text-orange-600"
+						href="/profile/{nip19.npubEncode(post.pubkey)}"
+					>
 						{#if author && author.display_name}
 							{author.display_name}
 						{:else if author && author.name}
