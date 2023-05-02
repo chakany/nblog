@@ -87,7 +87,7 @@
 
 <div class="flex flex-col">
 	<article>
-		<div class="font-display sm:px-14 md:px-4 xl:px-20 2xl:px-52">
+		<div class="sm:px-14 md:px-4 xl:px-20 2xl:px-52">
 			<div class="mt-2 flex">
 				<div class="text-xs">
 					<Tags tags={post.tags.filter((v) => v[0] === "t")} />
@@ -115,7 +115,7 @@
 					</a>
 				</div>
 			</div>
-			<h1 class="text-3xl font-black md:text-4xl">
+			<h1 class="text-3xl font-bold md:text-4xl">
 				<a href={url} target="_self">{title ? title[0] : "Title"}</a>
 			</h1>
 			<p class="text-muted-bright pt-1">{summary ? summary[0] : "Summary"}</p>
@@ -166,7 +166,7 @@
 				alt="Post"
 			/>
 			<div
-				class="prose prose-lg prose-gray font-body dark:prose-invert prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:rounded prose-code:bg-gray-200 prose-img:rounded-xl prose-code:dark:bg-slate-900"
+				class="prose prose-lg prose-gray font-serif dark:prose-invert prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-h6:text-base prose-code:rounded prose-code:bg-gray-200 prose-img:rounded-xl prose-code:dark:bg-slate-900"
 			>
 				{@html postContent}
 			</div>

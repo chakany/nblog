@@ -16,7 +16,7 @@
 	let showNpub = false;
 </script>
 
-<div class="flex gap-10 font-display max-sm:flex-col sm:gap-20">
+<div class="flex gap-10 font-sans max-sm:flex-col sm:gap-20">
 	<div class="flex max-sm:gap-24 sm:flex-col">
 		{#if profile && profile.picture}
 			<img
@@ -77,8 +77,8 @@
 	</div>
 
 	<div class="flex flex-col">
-		<span class="font-bold uppercase">About</span>
-		<h1 class="text-3xl font-black md:text-4xl">
+		<span class="font-semibold uppercase">About</span>
+		<h1 class="text-3xl font-bold md:text-4xl">
 			{#if profile && profile.display_name}
 				{profile.display_name}
 			{:else if profile && profile.name}
@@ -95,7 +95,7 @@
 			{/if}
 		</p>
 		<hr class="border-muted-dark my-5" />
-		<h2 class="text-2xl">Posts Authored</h2>
+		<h2 class="font-semibold text-2xl">Posts Authored</h2>
 		{#if data.posts[0]}
 			{#each data.posts as post, i}
 				<div class="py-8">

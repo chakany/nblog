@@ -43,9 +43,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/noto-serif-lao": "^4.5.13",
-		"@fontsource/roboto-mono": "^4.5.10",
-		"@fontsource/source-sans-pro": "^4.5.11",
 		"@fortawesome/free-brands-svg-icons": "^6.4.0",
 		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@tailwindcss/typography": "^0.5.9",
