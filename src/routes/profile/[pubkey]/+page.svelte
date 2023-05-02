@@ -16,32 +16,33 @@
 	let showNpub = false;
 </script>
 
-<div class="flex gap-20 font-display">
-	<div class="flex flex-col">
+<div class="flex max-sm:flex-col gap-10 sm:gap-20 font-display">
+	<div class="flex sm:flex-col max-sm:gap-24">
 		{#if profile && profile.picture}
 			<img
-				class="placeholder my-5 h-24 w-24 rounded-full"
-				src={profile.picture}
-				alt="Profile"
+					class="placeholder my-5 h-24 w-24 rounded-full"
+					src={profile.picture}
+					alt="Profile"
 			/>
 		{:else if profile}
 			<img
-				class="my-5 h-24 w-24 rounded-full"
-				src={`https://robohash.org/${data.profile.pubkey}?sets=1`}
-				alt="Profile"
+					class="my-5 h-24 w-24 rounded-full"
+					src={`https://robohash.org/${data.profile.pubkey}?sets=1`}
+					alt="Profile"
 			/>
 		{:else}
 			<div class="placeholder my-5 h-24 w-24 rounded-full" />
 		{/if}
-		{#if showNpub}
-			<div class="break-all">
-				{nip19.npubEncode(data.profile.pubkey)}
-			</div>
-		{:else}
-			<div class="cursor-pointer" on:click={() => (showNpub = true)}>Click to show npub</div>
-		{/if}
-		{#if profile && profile.nip05}
-			<div class="flex gap-1">
+		<div class="flex flex-col max-sm:my-auto">
+			{#if showNpub}
+				<div class="break-all">
+					{nip19.npubEncode(data.profile.pubkey)}
+				</div>
+			{:else}
+				<div class="cursor-pointer" on:click={() => (showNpub = true)}>Click to show npub</div>
+			{/if}
+			{#if profile && profile.nip05}
+				<div class="flex gap-1">
 				<span class="my-auto">
 					{#await nip05.queryProfile(profile.nip05)}
 						?
@@ -55,21 +56,22 @@
 						<Fa icon={faX} />
 					{/await}
 				</span>
-				{profile.nip05}
-			</div>
-		{/if}
-		{#if profile && profile.website}
-			<a class="flex gap-1 text-orange-600" href={profile.website}>
-				<span class="my-auto"><Fa icon={faLink} /></span>
-				{profile.website}
-			</a>
-		{/if}
-		{#if profile && profile.lud16}
-			<a class="flex gap-1 text-orange-600" href="https://sendsats.to/{profile.lud16}">
-				<span class="my-auto"><Fa icon={faBolt} /></span>
-				{profile.lud16}
-			</a>
-		{/if}
+					{profile.nip05}
+				</div>
+			{/if}
+			{#if profile && profile.website}
+				<a class="flex gap-1 text-orange-600" href={profile.website}>
+					<span class="my-auto"><Fa icon={faLink} /></span>
+					{profile.website}
+				</a>
+			{/if}
+			{#if profile && profile.lud16}
+				<a class="flex gap-1 text-orange-600" href="https://sendsats.to/{profile.lud16}">
+					<span class="my-auto"><Fa icon={faBolt} /></span>
+					{profile.lud16}
+				</a>
+			{/if}
+		</div>
 	</div>
 
 	<div class="flex flex-col">
