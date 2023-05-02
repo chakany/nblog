@@ -16,19 +16,19 @@
 	let showNpub = false;
 </script>
 
-<div class="flex max-sm:flex-col gap-10 sm:gap-20 font-display">
-	<div class="flex sm:flex-col max-sm:gap-24">
+<div class="flex gap-10 font-display max-sm:flex-col sm:gap-20">
+	<div class="flex max-sm:gap-24 sm:flex-col">
 		{#if profile && profile.picture}
 			<img
-					class="placeholder my-5 h-24 w-24 rounded-full"
-					src={profile.picture}
-					alt="Profile"
+				class="placeholder my-5 h-24 w-24 rounded-full"
+				src={profile.picture}
+				alt="Profile"
 			/>
 		{:else if profile}
 			<img
-					class="my-5 h-24 w-24 rounded-full"
-					src={`https://robohash.org/${data.profile.pubkey}?sets=1`}
-					alt="Profile"
+				class="my-5 h-24 w-24 rounded-full"
+				src={`https://robohash.org/${data.profile.pubkey}?sets=1`}
+				alt="Profile"
 			/>
 		{:else}
 			<div class="placeholder my-5 h-24 w-24 rounded-full" />
@@ -39,23 +39,25 @@
 					{nip19.npubEncode(data.profile.pubkey)}
 				</div>
 			{:else}
-				<div class="cursor-pointer" on:click={() => (showNpub = true)}>Click to show npub</div>
+				<div class="cursor-pointer" on:click={() => (showNpub = true)}>
+					Click to show npub
+				</div>
 			{/if}
 			{#if profile && profile.nip05}
 				<div class="flex gap-1">
-				<span class="my-auto">
-					{#await nip05.queryProfile(profile.nip05)}
-						?
-					{:then fetched}
-						{#if data.profile.pubkey === fetched.pubkey}
-							<Fa icon={faCheck} />
-						{:else}
+					<span class="my-auto">
+						{#await nip05.queryProfile(profile.nip05)}
+							?
+						{:then fetched}
+							{#if data.profile.pubkey === fetched.pubkey}
+								<Fa icon={faCheck} />
+							{:else}
+								<Fa icon={faX} />
+							{/if}
+						{:catch error}
 							<Fa icon={faX} />
-						{/if}
-					{:catch error}
-						<Fa icon={faX} />
-					{/await}
-				</span>
+						{/await}
+					</span>
 					{profile.nip05}
 				</div>
 			{/if}
