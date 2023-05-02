@@ -35,7 +35,7 @@ export const load = (async ({ params, setHeaders }) => {
 			"cache-control": "no-cache",
 		});
 		throw error(404, {
-			message: "Pubkey not found",
+			message: "Author not found",
 		});
 	}
 
