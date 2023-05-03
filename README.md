@@ -35,3 +35,24 @@ Configuration is done with enviroment variables.
 -   `PUBLIC_NAME` A name for your blog. ex: `nym's blog`
 -   `PUBLIC_PICTURE` A Picture URL for your blog, used in favicon and header.
 -   `PUBLIC_REACTIONS` Controls if you want reactions underneath your posts. Can either be `true` or `false`.
+
+## Customization
+
+#### Accent Color
+If you want to change the accent color, simply open `src/app.css` and look for the `--accent-color` variable.
+```css
+:root {
+	--accent-color: #ea5a0c;
+}
+```
+This variable will control the accent color, here you can set a hex value, or RGB, or something else.
+Accent color can be applied to elements using tailwind with it's color classes. For changing text color it would be `text-accent`, background is `bg-accent` and so on.
+
+#### Individual Pages
+nblog uses [SvelteKit](https://kit.svelte.dev/). SvelteKit pages use directory based routing, and these files can be found in `src/routes` and are addressed by `+page.svelte` or `+layout.svelte`.
+For example, if you wanted to change the header or footer, those could be found in `src/routes/+layout.svelte`.
+If you wanted to add info to the home page, you can edit it in `src/routes/+page.svelte`
+Keep in mind that nblog uses [Tailwind CSS](https://tailwindcss.com) for styling, so there are built in classes for you to use at your disposal.
+
+#### Components
+Various components are used throughout the app and can be customized. They are all located in `src/lib/*.svelte`.
