@@ -6,7 +6,7 @@ const config = {
 		},
 		extend: {
 			colors: {
-				"accent": "var(--accent-color)",
+				accent: "var(--accent-color)",
 			},
 		},
 	},

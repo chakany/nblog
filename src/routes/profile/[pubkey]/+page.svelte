@@ -95,7 +95,7 @@
 			{/if}
 		</p>
 		<hr class="border-muted-dark my-5" />
-		<h2 class="font-semibold text-2xl">Posts Authored</h2>
+		<h2 class="text-2xl font-semibold">Posts Authored</h2>
 		{#if data.posts[0]}
 			{#each data.posts as post, i}
 				<div class="py-8">

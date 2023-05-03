@@ -25,7 +25,7 @@
 		<a class="font-extrabold" href="/" target="_self">
 			{PUBLIC_NAME}
 		</a>
-		<div class="ml-auto uppercase font-semibold">
+		<div class="ml-auto font-semibold uppercase">
 			<ul class="flex sm:gap-2 lg:gap-4">
 				<li><a class="px-3 py-2" href="/" target="_self">Home</a></li>
 				<li><a class="px-3 py-2" href="/posts" target="_self">Posts</a></li>
