@@ -56,3 +56,8 @@ Keep in mind that nblog uses [Tailwind CSS](https://tailwindcss.com) for styling
 
 #### Components
 Various components are used throughout the app and can be customized. They are all located in `src/lib/*.svelte`.
+
+
+## Credits
+- Karnage for giving constructive critisism of the original design, providing his own designs, and making [v0.4.0](https://github.com/jacany/nblog/releases/tag/v0.4.0) possible.
+	- npub1r0rs5q2gk0e3dk3nlc7gnu378ec6cnlenqp8a3cjhyzu6f8k5sgs4sq9ac
