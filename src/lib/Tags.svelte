@@ -5,7 +5,7 @@
 
 <div class="flex flex-wrap gap-2 font-mono">
 	{#each tags as tag, i}
-		<a href="/tags/{isNostr ? tag[1] : tag}" target="_self" class="text-orange-600">
+		<a href="/tags/{isNostr ? tag[1] : tag}" target="_self" class="text-accent">
 			#{isNostr ? tag[1] : tag}
 		</a>
 		{#if tags[i + 1]}

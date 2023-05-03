@@ -122,7 +122,7 @@
 			<div class="my-3 flex">
 				{#if author && author.picture}
 					<img
-						class="placeholder my-auto h-14 w-14 rounded-full"
+						class="my-auto h-14 w-14 rounded-full"
 						src={author.picture}
 						alt="Profile"
 					/>
@@ -137,7 +137,7 @@
 				{/if}
 				<div class="my-auto flex flex-col pl-3">
 					<a
-						class="gap-1.5 font-mono text-orange-600"
+						class="gap-1.5 font-mono text-accent"
 						href="/profile/{nip19.npubEncode(post.pubkey)}"
 					>
 						{#if author && author.display_name}

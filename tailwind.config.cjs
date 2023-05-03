@@ -4,7 +4,11 @@ const config = {
 		container: {
 			center: true,
 		},
-		extend: {},
+		extend: {
+			colors: {
+				"accent": "var(--accent-color)",
+			},
+		},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };

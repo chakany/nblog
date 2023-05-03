@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--accent-color: #ea5a0c;
+}
+
 @layer utilities {
 	.text-muted-bright {
 		@apply text-gray-500 dark:text-slate-300;
