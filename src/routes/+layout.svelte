@@ -27,9 +27,9 @@
 		</a>
 		<div class="ml-auto font-semibold uppercase">
 			<ul class="flex sm:gap-2 lg:gap-4">
-				<li><a class="px-3 py-2" href="/" target="_self">Home</a></li>
-				<li><a class="px-3 py-2" href="/posts" target="_self">Posts</a></li>
-				<li><a class="px-3 py-2" href="/atom" target="_self">Feed</a></li>
+				<li><a class="px-3 py-2" href="/" target="_self">Inicio</a></li>
+				<li><a class="px-3 py-2" href="/posts" target="_self">Artículos</a></li>
+				<li><a class="px-3 py-2" href="/atom" target="_self">Fuente</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -42,12 +42,13 @@
 <hr class="border-muted-light" />
 <footer class="mx-6 my-6 flex text-xs">
 	<div class="mr-auto">
+		&copy; Bitcoin Txoko 2023.
 		Powered by <a class="underline" href="https://github.com/jacany/nblog">nblog</a> v{version}
 	</div>
 	<div class="text-right">
-		This website is published under the <a
+		este sitio web se publica bajo la licencia <a
 			class="underline"
-			href="https://github.com/jacany/nblog/tree/master/LICENSE">MIT License</a
+			href="https://github.com/jacany/nblog/tree/master/LICENSE">MIT </a
 		>
 	</div>
 </footer>

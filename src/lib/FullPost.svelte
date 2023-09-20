@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Event, nip19 } from "nostr-tools";
+	import { type Event, nip19, parseReferences } from "nostr-tools";
 	import showdown from "showdown";
 	import { readingTime, getTagValues } from "$lib/util";
 	import Tags from "$lib/Tags.svelte";
@@ -81,8 +81,22 @@
 	let copyIconScale = spring(1);
 	let tweetIconScale = spring(1);
 
+	let references = parseReferences(post)
+	let simpleAugmentedContent = post.content
+	for (let i = 0; i < references.length; i++) {
+  		let {text, profile, event, address} = references[i]
+  		let augmentedReference = profile
+    	? `<strong>@${profilesCache[profile.pubkey].name}</strong>`
+		: event
+		? `<em>${eventsCache[event.id].content.slice(0, 5)}</em>`
+		: address
+		? `<a href="https://blog.bitcointxoko.com/posts/${address.identifier}">[${address.identifier}]</a>`
+		: text
+		simpleAugmentedContent = simpleAugmentedContent.replaceAll(text, augmentedReference)
+	}
+
 	const converter = new showdown.Converter();
-	const postContent = converter.makeHtml(post.content);
+	const postContent = converter.makeHtml(simpleAugmentedContent);
 </script>
 
 <div class="flex flex-col">
@@ -154,7 +168,7 @@
 						{new Date(
 							published_at ? Number(published_at[0]) * 1000 : 0
 						).toLocaleDateString()} <span class="text-muted-dark">/</span>
-						{readingTime(post.content)} min read
+						{readingTime(post.content)} min de lectura
 					</div>
 				</div>
 			</div>

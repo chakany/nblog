@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-	<title>Tags {tagList} - {PUBLIC_NAME}</title>
+	<title>Etiquetas {tagList} - {PUBLIC_NAME}</title>
 	<meta property="og:title" content={"Tags " + tagList} />
 </svelte:head>
 

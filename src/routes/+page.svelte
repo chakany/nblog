@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - {PUBLIC_NAME}</title>
+	<title>Inicio - {PUBLIC_NAME}</title>
 	<meta property="og:title" content="Home" />
 </svelte:head>
 

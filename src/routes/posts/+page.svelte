@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Posts - {PUBLIC_NAME}</title>
+	<title>Artículos - {PUBLIC_NAME}</title>
 	<meta property="og:title" content="Posts" />
 </svelte:head>
 

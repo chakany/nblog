@@ -40,7 +40,7 @@
 				</div>
 			{:else}
 				<div class="cursor-pointer" on:click={() => (showNpub = true)}>
-					Click to show npub
+					Haz clic para mostrar npub
 				</div>
 			{/if}
 			{#if profile && profile.nip05}
@@ -77,7 +77,7 @@
 	</div>
 
 	<div class="flex flex-col">
-		<span class="font-semibold uppercase">About</span>
+		<span class="font-semibold uppercase">Sobre nosotros</span>
 		<h1 class="text-3xl font-bold md:text-4xl">
 			{#if profile && profile.display_name}
 				{profile.display_name}
@@ -95,7 +95,7 @@
 			{/if}
 		</p>
 		<hr class="border-muted-dark my-5" />
-		<h2 class="text-2xl font-semibold">Posts Authored</h2>
+		<h2 class="text-2xl font-semibold">Artículos</h2>
 		{#if data.posts[0]}
 			{#each data.posts as post, i}
 				<div class="py-8">

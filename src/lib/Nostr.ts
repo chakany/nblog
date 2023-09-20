@@ -55,7 +55,7 @@ export default class Nostr extends SimplePool {
 				this.pubkey = event.pubkey;
 				return event;
 			}
-			alert("No NIP-07 compatible extension found.");
+			alert("No se ha encontrado ninguna extensión compatible con NIP-07.");
 		}
 
 		return null;
