@@ -45,7 +45,7 @@ export const load = (async ({ params, setHeaders }) => {
 	const sub = nostrClient.sub(relays, [
 		{
 			kinds: [30023],
-			authors: nostrClient.pubkeys,
+			authors: [pubkey],
 		},
 		{
 			kinds: [0],
